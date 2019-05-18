@@ -71,7 +71,7 @@ public class UUIDUpdateTask {
                             try {
                                 Thread.sleep(600000L);
                                 return;
-                            } catch (InterruptedException ex) {
+                            } catch (InterruptedException ignored) {
                             }
                         }
 
@@ -87,9 +87,3 @@ public class UUIDUpdateTask {
         }.runTaskAsynchronously(this.plugin);
     }
 }
-
-
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\utils\UUIDUpdateTask.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

@@ -9,9 +9,3 @@ public class ConfigLoadingException extends Exception {
         super(message, cause);
     }
 }
-
-
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\config\ConfigLoadingException.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

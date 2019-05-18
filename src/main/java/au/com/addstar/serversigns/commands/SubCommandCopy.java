@@ -3,8 +3,6 @@ package au.com.addstar.serversigns.commands;
 import au.com.addstar.serversigns.ServerSignsPlugin;
 import au.com.addstar.serversigns.meta.*;
 import au.com.addstar.serversigns.commands.core.SubCommand;
-import au.com.addstar.serversigns.meta.SVSMetaManager;
-import au.com.addstar.serversigns.meta.SVSMetaValue;
 import au.com.addstar.serversigns.translations.Message;
 
 public class SubCommandCopy extends SubCommand {
@@ -30,8 +28,8 @@ public class SubCommandCopy extends SubCommand {
         }
 
 
-        applyMeta(SVSMetaKey.COPY, new SVSMetaValue(Boolean.valueOf(argSet(0) && argBool(0).booleanValue())));
-        if ((argSet(0)) && (argBool(0).booleanValue()) && (verbose)) msg(Message.PERSISTENCE_ON);
+        applyMeta(SVSMetaKey.COPY, new SVSMetaValue(argSet(0) && argBool(0).booleanValue()));
+        if ((argSet(0)) && (argBool(0)) && (verbose)) msg(Message.PERSISTENCE_ON);
         if (verbose) msg(Message.RIGHT_CLICK_COPY);
     }
 }

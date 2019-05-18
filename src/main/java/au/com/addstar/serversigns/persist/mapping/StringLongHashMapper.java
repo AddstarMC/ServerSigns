@@ -1,6 +1,7 @@
 package au.com.addstar.serversigns.persist.mapping;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.bukkit.configuration.MemorySection;
 
@@ -15,7 +16,7 @@ public class StringLongHashMapper implements IPersistenceMapper<HashMap<String, 
         HashMap<String, Long> map = new HashMap();
         if (this.memorySection.getConfigurationSection(path) == null) return map;
         for (String key : this.memorySection.getConfigurationSection(path).getKeys(false)) {
-            map.put(key, Long.valueOf(this.memorySection.getLong(path + "." + key)));
+            map.put(key, this.memorySection.getLong(path + "." + key));
         }
 
         return map;

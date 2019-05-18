@@ -66,7 +66,7 @@ public class LocationSetMapper implements ISmartPersistenceMapper<Set<Location>>
                 return null;
             }
             return new Location(world, x, y, z);
-        } catch (NumberFormatException ex) {
+        } catch (NumberFormatException ignored) {
         }
         return null;
     }

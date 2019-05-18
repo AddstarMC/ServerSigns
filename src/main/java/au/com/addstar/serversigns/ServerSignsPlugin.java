@@ -74,11 +74,9 @@ public class ServerSignsPlugin extends JavaPlugin {
             this.serverSignsManager = new ServerSignManager(this);
             final Set<ServerSign> preparedSigns = this.serverSignsManager.prepareServerSignsSet();
 
-            Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
-                public void run() {
-                    ServerSignsPlugin.this.taskManager.start();
-                    ServerSignsPlugin.this.serverSignsManager.populateSignsMap(preparedSigns);
-                }
+            Bukkit.getScheduler().scheduleSyncDelayedTask(this, () -> {
+                ServerSignsPlugin.this.taskManager.start();
+                ServerSignsPlugin.this.serverSignsManager.populateSignsMap(preparedSigns);
             }, 1L);
 
 

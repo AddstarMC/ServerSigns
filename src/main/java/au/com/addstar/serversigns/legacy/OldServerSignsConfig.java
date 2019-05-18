@@ -13,7 +13,7 @@ import org.bukkit.Material;
 
 public class OldServerSignsConfig implements IServerSignsConfig {
     @PersistenceEntry(configMapper = BlocksIdMapper.class)
-    private EnumSet<Material> blocks = EnumSet.of(Material.WALL_SIGN, Material.SIGN_POST);
+    private EnumSet<Material> blocks = EnumSet.of(Material.OAK_WALL_SIGN, Material.OAK_SIGN);
 
     @PersistenceEntry
     private String language = "en";
@@ -24,7 +24,7 @@ public class OldServerSignsConfig implements IServerSignsConfig {
     private String messageColour = "&e";
 
     @PersistenceEntry
-    private Boolean vault_grant = Boolean.valueOf(true);
+    private Boolean vault_grant = Boolean.TRUE;
 
     @PersistenceEntry
     private String permission_console_command_add = "pex user <player> add <permission>";
@@ -32,33 +32,33 @@ public class OldServerSignsConfig implements IServerSignsConfig {
     private String permission_console_command_remove = "pex user <player> remove <permission>";
 
     @PersistenceEntry
-    private Boolean must_be_sneaking_to_destroy = Boolean.valueOf(true);
+    private Boolean must_be_sneaking_to_destroy = Boolean.TRUE;
 
     @PersistenceEntry
-    private Boolean show_funds_removed_message = Boolean.valueOf(true);
+    private Boolean show_funds_removed_message = Boolean.TRUE;
 
     @PersistenceEntry
     private String currency = "dollars";
 
     @PersistenceEntry
-    private Boolean broadcastDevelopers = Boolean.valueOf(true);
+    private Boolean broadcastDevelopers = Boolean.TRUE;
 
     @PersistenceEntry
-    private Boolean automaticUpdateChecks = Boolean.valueOf(true);
+    private Boolean automaticUpdateChecks = Boolean.TRUE;
 
     @PersistenceEntry
-    private Boolean disableConsoleCommandLogging = Boolean.valueOf(false);
+    private Boolean disableConsoleCommandLogging = Boolean.FALSE;
 
     @PersistenceEntry
-    private Boolean allowLeftClicking = Boolean.valueOf(false);
+    private Boolean allowLeftClicking = Boolean.FALSE;
 
     @PersistenceEntry
-    private Boolean send_payments_to_bank = Boolean.valueOf(false);
+    private Boolean send_payments_to_bank = Boolean.FALSE;
     @PersistenceEntry
     private String deposit_bank_name = "server";
 
     @PersistenceEntry
-    private Boolean alternate_command_dispatching = Boolean.valueOf(false);
+    private Boolean alternate_command_dispatching = Boolean.FALSE;
 
     @PersistenceEntry(configPath = "blocked-commands")
     private List<String> blockedCommands = Arrays.asList("op", "deop", "stop");

@@ -19,10 +19,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
 public class PlayerListener implements Listener {
-    private static final EnumSet<Material> PLATE_MATERIALS = EnumSet.of(Material.WOOD_PLATE, Material.STONE_PLATE, Material.IRON_PLATE, Material.GOLD_PLATE);
+    private static final EnumSet<Material> PLATE_MATERIALS = EnumSet.of(Material.OAK_PRESSURE_PLATE, Material.STONE_PRESSURE_PLATE, Material.LIGHT_WEIGHTED_PRESSURE_PLATE, Material.HEAVY_WEIGHTED_PRESSURE_PLATE);
     private ServerSignsPlugin plugin;
     private HashMap<UUID, PlatePair> plateMap = new HashMap();
 
@@ -57,7 +58,7 @@ public class PlayerListener implements Listener {
 
                     this.plugin.serverSignExecutor.executeSignFull(player, sign, event);
                     if (PLATE_MATERIALS.contains(block.getType())) {
-                        pair = new PlatePair(createRemoveTask(this.plugin, playerUniqueId), event.isCancelled());
+                        pair = new PlatePair(createRemoveTask(this.plugin, playerUniqueId), false);
                         this.plateMap.put(playerUniqueId, pair);
                     }
                 }
@@ -79,7 +80,7 @@ public class PlayerListener implements Listener {
     }
 
     private BukkitTask createRemoveTask(ServerSignsPlugin plugin, final UUID playerUniqueId) {
-        new org.bukkit.scheduler.BukkitRunnable() {
+        return new BukkitRunnable() {
             public void run() {
                 PlayerListener.this.plateMap.remove(playerUniqueId);
             }

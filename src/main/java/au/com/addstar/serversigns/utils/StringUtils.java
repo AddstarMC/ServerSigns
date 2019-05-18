@@ -50,7 +50,7 @@ public abstract class StringUtils {
         assert (accuracy >= 0);
         if (accuracy <= 0)
             return "" + Math.round(d);
-        String s = String.format(Locale.ENGLISH, "%." + accuracy + "f", Double.valueOf(d));
+        String s = String.format(Locale.ENGLISH, "%." + accuracy + "f", d);
         int c = s.length() - 1;
         while (s.charAt(c) == '0')
             c--;

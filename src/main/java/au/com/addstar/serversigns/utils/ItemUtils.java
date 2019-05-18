@@ -2,7 +2,6 @@ package au.com.addstar.serversigns.utils;
 
 import au.com.addstar.serversigns.itemdata.ItemSearchCriteria;
 import au.com.addstar.serversigns.itemdata.ItemStringParser;
-import au.com.addstar.serversigns.legacy.ItemStringConverter;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -16,7 +15,7 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 public class ItemUtils {
     public static ItemStack getItemStackFromString(String itemString) {
-        ItemStringParser parser = new ItemStringParser(ItemStringConverter.convertPreV4String(itemString));
+        ItemStringParser parser = new ItemStringParser(itemString);
         return parser.parse();
     }
 
@@ -95,7 +94,7 @@ public class ItemUtils {
                 for (Map.Entry<Enchantment, Integer> entry : meta1.getEnchants().entrySet()) {
                     if (!meta2.getEnchants().containsKey(entry.getKey()))
                         return false;
-                    if (meta2.getEnchantLevel(entry.getKey()) != entry.getValue().intValue()) {
+                    if (meta2.getEnchantLevel(entry.getKey()) != entry.getValue()) {
                         return false;
                     }
                 }
@@ -110,15 +109,17 @@ public class ItemUtils {
 
         if (item.hasItemMeta()) {
             ItemMeta meta = item.getItemMeta();
-            if (meta.hasDisplayName()) list.add(messageColour + "  Name: " + meta.getDisplayName());
-            if (meta.hasLore())
-                list.add(messageColour + "  Lores: " + StringUtils.join(meta.getLore(), new StringBuilder().append(messageColour).append(", ").toString()));
-            if (meta.hasEnchants()) {
-                String enchants = "";
-                for (Map.Entry<Enchantment, Integer> entry : meta.getEnchants().entrySet()) {
-                    enchants = enchants + ParseUtils.getStringFromEnchantment(entry.getKey()) + " " + entry.getValue() + ", ";
+            if(meta!=null) {
+                if (meta.hasDisplayName()) list.add(messageColour + "  Name: " + meta.getDisplayName());
+                if (meta.hasLore())
+                    list.add(messageColour + "  Lores: " + StringUtils.join(meta.getLore(), messageColour + ", "));
+                if (meta.hasEnchants()) {
+                    String enchants = "";
+                    for (Map.Entry<Enchantment, Integer> entry : meta.getEnchants().entrySet()) {
+                        enchants = enchants + ParseUtils.getStringFromEnchantment(entry.getKey()) + " " + entry.getValue() + ", ";
+                    }
+                    list.add(messageColour + "  Enchants: " + enchants.trim().substring(0, enchants.trim().length() - 1).trim());
                 }
-                list.add(messageColour + "  Enchants: " + enchants.trim().substring(0, enchants.trim().length() - 1).trim());
             }
         }
 

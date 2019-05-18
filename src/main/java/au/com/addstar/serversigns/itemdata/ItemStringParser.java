@@ -66,10 +66,9 @@ public class ItemStringParser {
             this.errors = true;
             return null;
         }
-
         ItemMeta meta = stack.getItemMeta();
         for (ItemPart rel : dataMap.keySet()) {
-            data = rel.getAttachedData();
+            ItemData data = rel.getAttachedData();
             for (String value : dataMap.get(rel)) {
                 try {
                     if (data.canApplyToMeta())
@@ -77,12 +76,11 @@ public class ItemStringParser {
                     else
                         stack = data.applyValue(stack, value);
                 } catch (DataException ex) {
-                    ServerSignsPlugin.log("Disregarding invalid ItemPart with value '" + value + "' - " + ex.getMessage());
+                    ServerSignsPlugin.log(LOG_PREFIX + "Disregarding invalid ItemPart with value '" + value + "' - " + ex.getMessage());
                     this.errors = true;
                 }
             }
         }
-        ItemData data;
         stack.setItemMeta(meta);
         this.result = stack;
         return stack;
@@ -93,41 +91,41 @@ public class ItemStringParser {
     }
 
     protected HashMap<ItemPart, List<String>> createPartMap(boolean deepLog) {
-        HashMap<ItemPart, List<String>> map = new HashMap();
+        HashMap<ItemPart, List<String>> map = new HashMap<>();
         if (this.input.isEmpty()) {
             return map;
         }
-        if (!this.input.contains(" ")) {
-            if ((!this.input.contains(".")) || (this.input.indexOf(".") == this.input.length())) {
+        if (!this.input.contains(DELIMITER)) {
+            if ((!this.input.contains(".")) || (this.input.indexOf(EQUALIZER) == this.input.length())) {
                 return map;
             }
-            String key = this.input.substring(0, this.input.indexOf("."));
+            String key = this.input.substring(0, this.input.indexOf(EQUALIZER));
             ItemPart part = ItemPart.getPartFromPrefix(key);
             if (part == null) {
                 return map;
             }
-            String value = this.input.substring(this.input.indexOf(".") + 1);
+            String value = this.input.substring(this.input.indexOf(EQUALIZER) + 1);
             List<String> values = new ArrayList();
             values.add(value);
 
             map.put(part, values);
             return map;
         }
-        String[] set = this.input.split(" ");
+        String[] set = this.input.split(DELIMITER);
 
         for (String str : set)
-            if ((!str.contains(".")) || (this.input.indexOf(".") == this.input.length())) {
-                ServerSignsPlugin.log("Disregarding invalid ItemPart '" + str + "' as no value can be found");
+            if ((!str.contains(EQUALIZER)) || (this.input.indexOf(EQUALIZER) == this.input.length())) {
+                ServerSignsPlugin.log(LOG_PREFIX + "Disregarding invalid ItemPart '" + str + "' as no value can be found");
                 this.errors = true;
             } else {
-                String key = str.substring(0, str.indexOf("."));
+                String key = str.substring(0, str.indexOf(EQUALIZER));
                 ItemPart part = ItemPart.getPartFromPrefix(key);
                 if (part == null) {
                     if (deepLog) {
-                        ServerSignsPlugin.log("Disregarding invalid ItemPart definition: '" + key + "'");
+                        ServerSignsPlugin.log(LOG_PREFIX + "Disregarding invalid ItemPart definition: '" + key + "'");
                     }
                 } else {
-                    String value = str.substring(str.indexOf(".") + 1);
+                    String value = str.substring(str.indexOf(EQUALIZER) + 1);
 
                     if (map.containsKey(part)) {
                         List<String> values = map.get(part);
@@ -135,7 +133,7 @@ public class ItemStringParser {
 
                         map.put(part, values);
                     } else {
-                        List<String> values = new ArrayList();
+                        List<String> values = new ArrayList<>();
                         values.add(value);
 
                         map.put(part, values);

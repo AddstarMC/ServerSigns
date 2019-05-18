@@ -3,7 +3,6 @@ package au.com.addstar.serversigns.legacy;
 import au.com.addstar.serversigns.ServerSignsPlugin;
 import au.com.addstar.serversigns.taskmanager.tasks.*;
 import au.com.addstar.serversigns.taskmanager.TaskManagerTask;
-import au.com.addstar.serversigns.taskmanager.tasks.PlayerActionTask;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -51,8 +50,8 @@ public class QueueToTaskConverter {
         if (section != null) {
             for (String taskId : section.getKeys(false)) {
                 try {
-                    subSection = section.getConfigurationSection(taskId);
-                    timestamp = subSection.getLong("timestamp");
+                    ConfigurationSection subSection = section.getConfigurationSection(taskId);
+                    long timestamp = subSection.getLong("timestamp");
                     String type = subSection.getString("type");
 
                     switch (type) {

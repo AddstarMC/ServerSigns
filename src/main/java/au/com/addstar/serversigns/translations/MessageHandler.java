@@ -152,7 +152,6 @@ public class MessageHandler {
                     } catch (Throwable localThrowable1) {
                         localThrowable4 = localThrowable1;
                         throw localThrowable1;
-                    } finally {
                     }
                 } catch (Throwable localThrowable2) {
                     localThrowable3 = localThrowable2;

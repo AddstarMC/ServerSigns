@@ -3,8 +3,6 @@ package au.com.addstar.serversigns.commands;
 import au.com.addstar.serversigns.ServerSignsPlugin;
 import au.com.addstar.serversigns.meta.*;
 import au.com.addstar.serversigns.commands.core.SubCommand;
-import au.com.addstar.serversigns.meta.SVSMeta;
-import au.com.addstar.serversigns.meta.SVSMetaValue;
 import au.com.addstar.serversigns.translations.Message;
 
 public class SubCommandGrantPermission extends SubCommand {
@@ -19,23 +17,21 @@ public class SubCommandGrantPermission extends SubCommand {
             return;
         }
 
-
+        SVSMeta meta;
         if (arg(0).equalsIgnoreCase("delete")) {
-            SVSMeta meta = new SVSMeta(SVSMetaKey.GRANT, new SVSMetaValue(Boolean.valueOf(false)));
+            meta = new SVSMeta(SVSMetaKey.GRANT, new SVSMetaValue(Boolean.FALSE));
             if (verbose) msg(Message.RIGHT_CLICK_DEL_PERMISSION);
         } else if (arg(0).equalsIgnoreCase("add")) {
             if (!argSet(1)) {
                 if (verbose) sendUsage();
                 return;
             }
-
-            SVSMeta meta = new SVSMeta(SVSMetaKey.GRANT, new SVSMetaValue(Boolean.valueOf(true)), new SVSMetaValue(arg(1)));
+            meta = new SVSMeta(SVSMetaKey.GRANT, new SVSMetaValue(Boolean.TRUE), new SVSMetaValue(arg(1)));
             if (verbose) msg(Message.RIGHT_CLICK_BIND_PERMISSION);
         } else {
             if (verbose) sendUsage();
             return;
         }
-        SVSMeta meta;
         SVSMetaManager.setMeta(this.player, meta);
     }
 }

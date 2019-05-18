@@ -7,8 +7,9 @@ import org.bukkit.entity.Player;
 
 
 public class SVSMetaManager {
-    private static HashMap<UUID, SVSMeta> map = new HashMap();
-    private static HashMap<UUID, SVSMeta> specialMap = new HashMap();
+    public static final UUID CONSOLE_UUID = UUID.randomUUID();
+    private static HashMap<UUID, SVSMeta> map = new HashMap<>();
+    private static HashMap<UUID, SVSMeta> specialMap = new HashMap<>();
 
     public static void setMeta(Player player, SVSMeta meta) {
         setMeta(player.getUniqueId(), meta);
@@ -98,9 +99,3 @@ public class SVSMetaManager {
         map.clear();
     }
 }
-
-
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\meta\SVSMetaManager.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

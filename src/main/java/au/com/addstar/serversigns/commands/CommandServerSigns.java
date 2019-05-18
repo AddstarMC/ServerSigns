@@ -91,8 +91,8 @@ public class CommandServerSigns extends Command {
 
             match.execute(this.sender, this.args.subList(1, this.args.size()), commandLabel, true);
 
-            java.util.UUID id = this.player == null ? SVSMetaManager.CONSOLE_UUID : this.player.getUniqueId();
-            if ((SVSMetaManager.hasSpecialMeta(id, SVSMetaKey.SELECT)) && (SVSMetaManager.hasMeta(id))) {
+            java.util.UUID id = (this.player == null) ? null : this.player.getUniqueId();
+            if (id == null || ((SVSMetaManager.hasSpecialMeta(id, SVSMetaKey.SELECT)) && (SVSMetaManager.hasMeta(id)))) {
                 this.plugin.adminListener.handleAdminInteract(SVSMetaManager.getSpecialMeta(id).getValue().asLocation(), this.sender, id);
             }
             return;

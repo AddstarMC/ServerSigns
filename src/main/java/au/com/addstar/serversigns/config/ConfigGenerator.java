@@ -43,7 +43,7 @@ public class ConfigGenerator {
 
                 writer.write("# Don't touch this! It might wipe your entire config!!");
                 writer.newLine();
-                writer.write(String.format("config-version: %s", Integer.valueOf(config.getVersion())));
+                writer.write(String.format("config-version: %s", config.getVersion()));
                 writer.newLine();
 
 
@@ -87,13 +87,12 @@ public class ConfigGenerator {
 
 
             } finally {
-
-
-                if (writer != null) if (localThrowable2 != null) try {
-                    writer.close();
-                } catch (Throwable x2) {
-                    localThrowable2.addSuppressed(x2);
-                }
+                if (localThrowable2 != null)
+                    try {
+                        writer.close();
+                    } catch (Throwable x2) {
+                        localThrowable2.addSuppressed(x2);
+                    }
                 else writer.close();
             }
         } catch (IOException e) {
@@ -101,9 +100,3 @@ public class ConfigGenerator {
         }
     }
 }
-
-
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\config\ConfigGenerator.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

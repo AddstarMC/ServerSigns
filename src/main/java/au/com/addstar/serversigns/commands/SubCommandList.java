@@ -3,8 +3,6 @@ package au.com.addstar.serversigns.commands;
 import au.com.addstar.serversigns.ServerSignsPlugin;
 import au.com.addstar.serversigns.meta.*;
 import au.com.addstar.serversigns.commands.core.SubCommand;
-import au.com.addstar.serversigns.meta.SVSMetaManager;
-import au.com.addstar.serversigns.meta.SVSMetaValue;
 import au.com.addstar.serversigns.translations.Message;
 
 public class SubCommandList extends SubCommand {
@@ -31,7 +29,7 @@ public class SubCommandList extends SubCommand {
 
 
         applyMeta(SVSMetaKey.LIST, new SVSMetaValue(argBool(0, false)));
-        if ((argSet(0)) && (argBool(0, false).booleanValue()) && (verbose)) msg(Message.LIST_PERSIST_ON);
+        if ((argSet(0)) && (argBool(0, false)) && (verbose)) msg(Message.LIST_PERSIST_ON);
         if (verbose) msg(Message.RIGHT_CLICK_VIEW_LIST);
     }
 }

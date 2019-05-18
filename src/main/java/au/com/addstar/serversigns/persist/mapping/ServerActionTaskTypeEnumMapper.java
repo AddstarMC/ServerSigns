@@ -12,7 +12,7 @@ public class ServerActionTaskTypeEnumMapper implements IPersistenceMapper<Server
     public ServerActionTaskType getValue(String path) {
         try {
             return Enum.valueOf(ServerActionTaskType.class, this.memorySection.getString(path));
-        } catch (IllegalArgumentException | NullPointerException ex) {
+        } catch (IllegalArgumentException | NullPointerException ignored) {
         }
         return null;
     }

@@ -6,6 +6,8 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import org.apache.commons.lang.Validate;
+import org.bukkit.Bukkit;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
@@ -32,7 +34,7 @@ public class InventoryUtils {
 
                 if (first < 0) {
                     item.setAmount(toDelete);
-                    leftover.put(Integer.valueOf(i), item);
+                    leftover.put(i, item);
                     break;
                 }
 
@@ -83,17 +85,18 @@ public class InventoryUtils {
             return null;
         }
         int size = inventory.getSize();
+        InventoryType type = inventory.getType();
 
         int rem = size % 9;
         if (rem > 0) {
             size += 9 - rem;
         }
-
         InventoryHolder holder = inventory.getHolder();
-        String title = inventory.getTitle();
-
-        Inventory ret = org.bukkit.Bukkit.createInventory(holder, size, title);
-
+        Inventory ret;
+        if (size != type.getDefaultSize()) {
+            ret = Bukkit.createInventory(holder, size);
+        } else
+            ret = Bukkit.createInventory(holder, type);
         ItemStack[] contents = cloneItemStacks(inventory.getContents());
         ret.setContents(contents);
 
@@ -101,8 +104,3 @@ public class InventoryUtils {
     }
 }
 
-
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\utils\InventoryUtils.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

@@ -25,8 +25,7 @@ public class CheckOptionOperator extends ConditionalOperator {
 
         String optionId = this.params.substring(0, this.params.indexOf('='));
         String rawAnswer = this.params.substring(this.params.indexOf('=') + 1);
-        String[] answerLabels = {rawAnswer.contains("|") ? rawAnswer.split("|") : rawAnswer};
-
+        String[] answerLabels = rawAnswer.contains("|") ? rawAnswer.split("|") : new String[1];
 
         PlayerInputOptions options = executingSign.getInputOption(optionId);
         if (options != null) {

@@ -84,10 +84,6 @@ public class ServerSignCommand implements java.io.Serializable {
             ret = ret.replaceAll("<player>", executor.getName());
             ret = ret.replaceAll("<name>", executor.getName());
             ret = ret.replaceAll("<uuid>", executor.getUniqueId().toString());
-            if (plugin.hookManager.essentials.isHooked()) {
-                String nick = plugin.hookManager.essentials.getHook().getNickname(executor);
-                ret = ret.replaceAll("<nick>", Matcher.quoteReplacement(nick == null ? executor.getName() : nick));
-            }
         }
 
         if (injectedReplacements != null) {

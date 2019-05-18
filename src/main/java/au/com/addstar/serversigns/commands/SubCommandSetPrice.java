@@ -18,7 +18,7 @@ public class SubCommandSetPrice extends SubCommand {
             return;
         }
 
-        if (argDouble(0, Double.valueOf(-1.0D)).doubleValue() < 0.0D) {
+        if (argDouble(0, -1.0D) < 0.0D) {
             if (verbose) sendUsage();
             return;
         }

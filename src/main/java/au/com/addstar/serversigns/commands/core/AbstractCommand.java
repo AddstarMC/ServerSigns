@@ -63,8 +63,8 @@ public abstract class AbstractCommand {
             return def;
         }
         try {
-            return Long.valueOf(Long.parseLong(str));
-        } catch (Exception e) {
+            return Long.parseLong(str);
+        } catch (Exception ignored) {
         }
         return def;
     }
@@ -82,8 +82,8 @@ public abstract class AbstractCommand {
             return def;
         }
         try {
-            return Integer.valueOf(Integer.parseInt(str));
-        } catch (Exception e) {
+            return Integer.parseInt(str);
+        } catch (Exception ignored) {
         }
         return def;
     }
@@ -101,8 +101,8 @@ public abstract class AbstractCommand {
             return def;
         }
         try {
-            return Double.valueOf(Double.parseDouble(str));
-        } catch (Exception e) {
+            return Double.parseDouble(str);
+        } catch (Exception ignored) {
         }
         return def;
     }
@@ -117,13 +117,13 @@ public abstract class AbstractCommand {
 
     protected Boolean strAsBool(String str) {
         str = str.toLowerCase();
-        return Boolean.valueOf((str.startsWith("y")) || (str.startsWith("t")) || (str.startsWith("on")) || (str.startsWith("+")) || (str.startsWith("1")));
+        return (str.startsWith("y")) || (str.startsWith("t")) || (str.startsWith("on")) || (str.startsWith("+")) || (str.startsWith("1"));
     }
 
     protected Boolean argBool(int idx, boolean def) {
         String str = arg(idx);
         if (str == null) {
-            return Boolean.valueOf(def);
+            return def;
         }
         return strAsBool(str);
     }

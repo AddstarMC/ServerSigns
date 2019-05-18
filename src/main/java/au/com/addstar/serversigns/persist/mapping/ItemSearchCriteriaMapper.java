@@ -18,10 +18,10 @@ public class ItemSearchCriteriaMapper implements IPersistenceMapper<ItemSearchCr
 
 
     public void setValue(String path, ItemSearchCriteria val) {
-        this.memorySection.set(path + ".enchants", Boolean.valueOf(val.getEnchantsCriteria()));
-        this.memorySection.set(path + ".name", Boolean.valueOf(val.getIgnoreName()));
-        this.memorySection.set(path + ".lores", Boolean.valueOf(val.getIgnoreLore()));
-        this.memorySection.set(path + ".durability", Boolean.valueOf(val.getIgnoreDurability()));
+        this.memorySection.set(path + ".enchants", val.getEnchantsCriteria());
+        this.memorySection.set(path + ".name", val.getIgnoreName());
+        this.memorySection.set(path + ".lores", val.getIgnoreLore());
+        this.memorySection.set(path + ".durability", val.getIgnoreDurability());
     }
 }
 

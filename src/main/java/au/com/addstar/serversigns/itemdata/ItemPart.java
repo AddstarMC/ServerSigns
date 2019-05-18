@@ -3,7 +3,6 @@ package au.com.addstar.serversigns.itemdata;
 public enum ItemPart {
     TYPE(ItemType.get()),
     AMOUNT(ItemAmount.get()),
-    DAMAGE(ItemDamage.get()),
     ENCHANTS(ItemEnchants.get()),
     NAME(ItemName.get()),
     LORES(ItemLore.get()),

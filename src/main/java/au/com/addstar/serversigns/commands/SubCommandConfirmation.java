@@ -3,8 +3,6 @@ package au.com.addstar.serversigns.commands;
 import au.com.addstar.serversigns.ServerSignsPlugin;
 import au.com.addstar.serversigns.meta.*;
 import au.com.addstar.serversigns.commands.core.SubCommand;
-import au.com.addstar.serversigns.meta.SVSMeta;
-import au.com.addstar.serversigns.meta.SVSMetaValue;
 import au.com.addstar.serversigns.translations.Message;
 
 public class SubCommandConfirmation extends SubCommand {
@@ -19,8 +17,8 @@ public class SubCommandConfirmation extends SubCommand {
             return;
         }
 
-        boolean value = argBool(0).booleanValue();
-        SVSMeta meta = new SVSMeta(SVSMetaKey.CONFIRMATION, new SVSMetaValue(Boolean.valueOf(value)));
+        boolean value = argBool(0);
+        SVSMeta meta = new SVSMeta(SVSMetaKey.CONFIRMATION, new SVSMetaValue(value));
         if ((value) && (argSet(1))) {
             meta.addValue(new SVSMetaValue(loopArgs(1)));
         }

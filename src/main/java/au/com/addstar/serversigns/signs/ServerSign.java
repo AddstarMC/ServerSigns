@@ -295,7 +295,7 @@ public class ServerSign implements Cloneable, java.io.Serializable {
 
     public void addLastUse(UUID player) {
         if (this.cooldown > 0L) {
-            this.lastUse.put(player.toString(), Long.valueOf(System.currentTimeMillis()));
+            this.lastUse.put(player.toString(), System.currentTimeMillis());
         }
     }
 
@@ -305,7 +305,7 @@ public class ServerSign implements Cloneable, java.io.Serializable {
 
     public long getLastUse(UUID player) {
         if (this.lastUse.containsKey(player.toString())) {
-            return this.lastUse.get(player.toString()).longValue();
+            return this.lastUse.get(player.toString());
         }
 
         return 0L;
@@ -355,7 +355,7 @@ public class ServerSign implements Cloneable, java.io.Serializable {
     }
 
     public void setXP(Integer cost) {
-        this.xp = cost.intValue();
+        this.xp = cost;
     }
 
     public CancelMode getCancelMode() {
@@ -514,9 +514,7 @@ public class ServerSign implements Cloneable, java.io.Serializable {
     }
 
     public void setInputOptionQuestion(String id, String question) {
-        Iterator<PlayerInputOptions> iterator = this.playerInputOptions.iterator();
-        while (iterator.hasNext()) {
-            PlayerInputOptions options = iterator.next();
+        for (PlayerInputOptions options : this.playerInputOptions) {
             if (options.getName().equalsIgnoreCase(id)) {
                 options.setQuestion(question);
                 return;
@@ -529,9 +527,7 @@ public class ServerSign implements Cloneable, java.io.Serializable {
     }
 
     public void addInputOptionAnswer(String id, String label, String description) {
-        Iterator<PlayerInputOptions> iterator = this.playerInputOptions.iterator();
-        while (iterator.hasNext()) {
-            PlayerInputOptions options = iterator.next();
+        for (PlayerInputOptions options : this.playerInputOptions) {
             if (options.getName().equalsIgnoreCase(id)) {
                 options.addAnswer(label, description);
                 return;

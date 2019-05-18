@@ -17,7 +17,7 @@ public class SubCommandEdit extends SubCommand {
             return;
         }
 
-        int line = argInt(0, Integer.valueOf(-1)).intValue();
+        int line = argInt(0, -1);
         if (line < 1) {
             sendUsage();
             return;
@@ -28,7 +28,7 @@ public class SubCommandEdit extends SubCommand {
             return;
         }
 
-        CommandUtils.applyServerSignCommandMeta(command, this.plugin, this.sender, verbose, SVSMetaKey.EDIT, new SVSMetaValue(Integer.valueOf(line)));
+        CommandUtils.applyServerSignCommandMeta(command, this.plugin, this.sender, verbose, SVSMetaKey.EDIT, new SVSMetaValue(line));
     }
 }
 

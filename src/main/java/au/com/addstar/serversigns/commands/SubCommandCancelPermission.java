@@ -3,8 +3,6 @@ package au.com.addstar.serversigns.commands;
 import au.com.addstar.serversigns.ServerSignsPlugin;
 import au.com.addstar.serversigns.meta.*;
 import au.com.addstar.serversigns.commands.core.SubCommand;
-import au.com.addstar.serversigns.meta.SVSMeta;
-import au.com.addstar.serversigns.meta.SVSMetaValue;
 import au.com.addstar.serversigns.translations.Message;
 
 public class SubCommandCancelPermission extends SubCommand {

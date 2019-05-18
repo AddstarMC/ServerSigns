@@ -12,7 +12,7 @@ public class CancelEnumMapper implements IPersistenceMapper<CancelMode> {
     public CancelMode getValue(String path) {
         try {
             return Enum.valueOf(CancelMode.class, this.memorySection.getString(path));
-        } catch (IllegalArgumentException | NullPointerException ex) {
+        } catch (IllegalArgumentException | NullPointerException ignored) {
         }
         return null;
     }

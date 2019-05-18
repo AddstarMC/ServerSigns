@@ -18,7 +18,7 @@ public class SubCommandSilent extends SubCommand {
             return;
         }
 
-        applyMeta(SVSMetaKey.SILENT, new SVSMetaValue(Boolean.valueOf(!argBool(0).booleanValue())));
+        applyMeta(SVSMetaKey.SILENT, new SVSMetaValue(!argBool(0).booleanValue()));
         if (verbose) msg(Message.RIGHT_CLICK_APPLY);
     }
 }

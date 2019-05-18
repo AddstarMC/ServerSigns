@@ -15,7 +15,7 @@ public class PlayerUniqueIdMapper implements IPersistenceMapper<UUID> {
         String string = this.memorySection.getString(path);
         try {
             return UUID.fromString(string);
-        } catch (IllegalArgumentException ex) {
+        } catch (IllegalArgumentException ignored) {
         }
         return null;
     }

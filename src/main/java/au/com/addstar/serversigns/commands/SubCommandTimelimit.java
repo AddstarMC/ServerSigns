@@ -22,21 +22,26 @@ public class SubCommandTimelimit extends SubCommand {
         long min = -1L;
         long max = -1L;
 
-        if (arg(0).equals("@")) {
-            if (!argSet(1)) {
-                sendUsage();
-            }
-        } else if (arg(0).equals("-")) {
-            min = 0L;
-            max = 0L;
-        } else if (arg(0).equals("0")) {
-            min = 0L;
-        } else {
-            min = TimeUtils.convertDSDDFToEpochMillis(arg(0), this.plugin.config.getTimeZone());
-            if (min == 0L) {
-                msg(Message.TIMELIMIT_INVALID);
-                return;
-            }
+        switch (arg(0)) {
+            case "@":
+                if (!argSet(1)) {
+                    sendUsage();
+                }
+                break;
+            case "-":
+                min = 0L;
+                max = 0L;
+                break;
+            case "0":
+                min = 0L;
+                break;
+            default:
+                min = TimeUtils.convertDSDDFToEpochMillis(arg(0), this.plugin.config.getTimeZone());
+                if (min == 0L) {
+                    msg(Message.TIMELIMIT_INVALID);
+                    return;
+                }
+                break;
         }
 
         if (argSet(1)) {
@@ -52,7 +57,7 @@ public class SubCommandTimelimit extends SubCommand {
         }
 
         msg(Message.RIGHT_CLICK_APPLY);
-        applyMeta(SVSMetaKey.TIME_LIMIT, new SVSMetaValue(Long.valueOf(min)), new SVSMetaValue(Long.valueOf(max)));
+        applyMeta(SVSMetaKey.TIME_LIMIT, new SVSMetaValue(min), new SVSMetaValue(max));
     }
 }
 

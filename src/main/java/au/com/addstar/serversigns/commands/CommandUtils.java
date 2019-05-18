@@ -37,7 +37,8 @@ public class CommandUtils {
             SVSMetaValue[] values = java.util.Arrays.copyOf(precursingValues, precursingValues.length + 1);
             values[(values.length - 1)] = new SVSMetaValue(cmd);
 
-            SVSMetaManager.setMeta((executor instanceof Player) ? ((Player) executor).getUniqueId() : SVSMetaManager.CONSOLE_UUID, new SVSMeta(key, values));
+            SVSMetaManager.setMeta(
+                    (executor instanceof Player) ? ((Player) executor).getUniqueId() : SVSMetaManager.CONSOLE_UUID, new SVSMeta(key, values));
 
 
             if (verbose) plugin.send(executor, Message.RIGHT_CLICK_BIND_CMD);

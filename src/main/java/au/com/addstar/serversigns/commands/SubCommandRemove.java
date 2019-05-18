@@ -15,7 +15,7 @@ public class SubCommandRemove extends SubCommand {
 
 
     public void execute(boolean verbose) {
-        applyMeta(SVSMetaKey.REMOVE, new SVSMetaValue(argInt(0, Integer.valueOf(-1))));
+        applyMeta(SVSMetaKey.REMOVE, new SVSMetaValue(argInt(0, -1)));
         if (verbose) msg(Message.RIGHT_CLICK_REMOVE_COMMAND);
     }
 }

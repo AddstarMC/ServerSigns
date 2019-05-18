@@ -18,7 +18,7 @@ import org.bukkit.Material;
 
 public class ServerSignsConfig implements IServerSignsConfig {
     @PersistenceEntry(configMapper = BlocksMapper.class, comments = {"# A list of material names (should be in the Bukkit/Spigot Material enum form)", "# These materials define the blocks which can be used with ServerSigns", "# Refer to this page for the list: https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html"})
-    private EnumSet<Material> blocks = EnumSet.of(Material.WALL_SIGN, Material.SIGN_POST);
+    private EnumSet<Material> blocks = EnumSet.of(Material.OAK_WALL_SIGN, Material.OAK_SIGN);
 
 
     @PersistenceEntry(comments = {"# Whether or not any block can be used with ServerSigns (overrides 'blocks' list)"})
@@ -215,19 +215,19 @@ public class ServerSignsConfig implements IServerSignsConfig {
         this.language = oldConfig.getLanguage();
         this.message_prefix = oldConfig.getMessageTag();
         this.message_colour = oldConfig.getMessageColour();
-        this.vault_grant = oldConfig.getVaultGrant().booleanValue();
+        this.vault_grant = oldConfig.getVaultGrant();
         this.permission_add_command = oldConfig.getPermissionConsoleCommandAdd();
         this.permission_remove_command = oldConfig.getPermissionConsoleCommandRemove();
-        this.sneak_to_destroy = oldConfig.getMustBeSneakingToDestroy().booleanValue();
-        this.show_funds_removed_message = oldConfig.getShowFundsRemovedMessage().booleanValue();
+        this.sneak_to_destroy = oldConfig.getMustBeSneakingToDestroy();
+        this.show_funds_removed_message = oldConfig.getShowFundsRemovedMessage();
         this.currency_string = oldConfig.getCurrency();
-        this.broadcast_developers = oldConfig.getBroadcastDevelopers().booleanValue();
-        this.check_for_updates = oldConfig.getAutomaticUpdateChecks().booleanValue();
-        this.disable_command_logging = oldConfig.getDisableConsoleCommandLogging().booleanValue();
-        this.allow_left_clicking = oldConfig.getAllowLeftClicking().booleanValue();
-        this.send_payments_to_bank = oldConfig.getSendPaymentsToBank().booleanValue();
+        this.broadcast_developers = oldConfig.getBroadcastDevelopers();
+        this.check_for_updates = oldConfig.getAutomaticUpdateChecks();
+        this.disable_command_logging = oldConfig.getDisableConsoleCommandLogging();
+        this.allow_left_clicking = oldConfig.getAllowLeftClicking();
+        this.send_payments_to_bank = oldConfig.getSendPaymentsToBank();
         this.deposit_bank_name = oldConfig.getDepositBankName();
-        this.alternate_command_dispatching = oldConfig.getAlternateCommandDispatching().booleanValue();
+        this.alternate_command_dispatching = oldConfig.getAlternateCommandDispatching();
         this.blocked_commands = oldConfig.getBlockedCommands();
         colourise();
     }

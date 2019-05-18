@@ -97,8 +97,8 @@ public class CommandServerSignsRemote extends Command {
 
             match.execute(this.sender, this.args.subList(2, this.args.size()), this.label, false);
 
-            java.util.UUID id = this.player == null ? SVSMetaManager.CONSOLE_UUID : this.player.getUniqueId();
-            if (SVSMetaManager.hasMeta(id)) {
+            java.util.UUID id = this.player == null ? null : this.player.getUniqueId();
+            if (id == null || SVSMetaManager.hasMeta(id)) {
                 this.plugin.adminListener.handleAdminInteract(remoteLocation, this.sender, id);
             }
             return;

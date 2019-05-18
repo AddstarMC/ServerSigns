@@ -17,7 +17,7 @@ public class SubCommandInsert extends SubCommand {
             return;
         }
 
-        int line = argInt(0, Integer.valueOf(-1)).intValue();
+        int line = argInt(0, -1);
         if (line < 1) {
             if (verbose) sendUsage();
             return;
@@ -28,7 +28,7 @@ public class SubCommandInsert extends SubCommand {
             return;
         }
 
-        CommandUtils.applyServerSignCommandMeta(command, this.plugin, this.sender, verbose, SVSMetaKey.INSERT, new SVSMetaValue(Integer.valueOf(line)));
+        CommandUtils.applyServerSignCommandMeta(command, this.plugin, this.sender, verbose, SVSMetaKey.INSERT, new SVSMetaValue(line));
     }
 }
 

@@ -4,8 +4,6 @@ import au.com.addstar.serversigns.ServerSignsPlugin;
 import au.com.addstar.serversigns.meta.*;
 import au.com.addstar.serversigns.translations.Message;
 import au.com.addstar.serversigns.commands.core.SubCommand;
-import au.com.addstar.serversigns.meta.SVSMetaKey;
-import au.com.addstar.serversigns.meta.SVSMetaValue;
 
 public class SubCommandLong extends SubCommand {
     public SubCommandLong(ServerSignsPlugin plugin) {

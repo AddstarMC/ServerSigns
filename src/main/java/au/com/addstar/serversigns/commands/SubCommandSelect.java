@@ -20,7 +20,7 @@ public class SubCommandSelect extends SubCommand {
             return;
         }
 
-        applyMeta(SVSMetaKey.SELECT, new SVSMetaValue(Integer.valueOf(1)));
+        applyMeta(SVSMetaKey.SELECT, new SVSMetaValue(1));
         if (verbose) msg(Message.RIGHT_CLICK_SELECT);
     }
 }

@@ -169,7 +169,7 @@ public class SQLiteDataStorageAccessor
                 Statement s = this.connection.createStatement();
                 ResultSet resultSet = s.executeQuery(SQL_SELECT_ALL)
         ) {
-            Map<Long, TaskManagerTask> loadedTasks = new TreeMap<Long, TaskManagerTask>();
+            Map<Long, TaskManagerTask> loadedTasks = new TreeMap<>();
             while (resultSet.next()) {
                 try {
                     TaskType taskType = TaskType.valueOf(resultSet.getString(3));
@@ -177,7 +177,7 @@ public class SQLiteDataStorageAccessor
                     if (taskLoader != null) {
                         TaskManagerTask task = taskLoader.getTaskFromCurrentRow(resultSet, loadedTasks);
                         if (task != null) {
-                            loadedTasks.put(Long.valueOf(task.getTaskID()), task);
+                            loadedTasks.put(task.getTaskID(), task);
                             continue;
                         }
                     }

@@ -18,7 +18,7 @@ public class PermissionRemovePlayerTaskLoader implements ISQLiteTaskLoader<Permi
 
             case PERMISSION_GRANT_REMOVE:
                 long grantTaskId = Long.parseLong(resultSet.getString(5));
-                TaskManagerTask grantTask = loadedTasks.get(Long.valueOf(grantTaskId));
+                TaskManagerTask grantTask = loadedTasks.get(grantTaskId);
                 if ((grantTask != null) && ((grantTask instanceof PermissionGrantPlayerTask))) {
                     return new PermissionRemovePlayerTask(resultSet.getLong(1), resultSet.getLong(2), UUID.fromString(resultSet.getString(6)), (PermissionGrantPlayerTask) grantTask, true);
                 }

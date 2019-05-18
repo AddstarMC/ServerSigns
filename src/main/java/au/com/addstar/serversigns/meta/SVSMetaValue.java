@@ -16,7 +16,7 @@ public class SVSMetaValue {
 
     public long asLong() {
         if ((this.object instanceof Long)) {
-            return ((Long) this.object).longValue();
+            return (Long) this.object;
         }
 
         return Long.MIN_VALUE;
@@ -24,7 +24,7 @@ public class SVSMetaValue {
 
     public int asInt() {
         if ((this.object instanceof Integer)) {
-            return ((Integer) this.object).intValue();
+            return (Integer) this.object;
         }
 
         return Integer.MIN_VALUE;
@@ -32,7 +32,7 @@ public class SVSMetaValue {
 
     public double asDouble() {
         if ((this.object instanceof Double)) {
-            return ((Double) this.object).doubleValue();
+            return (Double) this.object;
         }
 
         return Double.MIN_VALUE;
@@ -48,7 +48,7 @@ public class SVSMetaValue {
 
     public boolean asBoolean() {
         if ((this.object instanceof Boolean)) {
-            return ((Boolean) this.object).booleanValue();
+            return (Boolean) this.object;
         }
 
         return false;

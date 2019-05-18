@@ -5,8 +5,6 @@ import au.com.addstar.serversigns.signs.ServerSign;
 import au.com.addstar.serversigns.translations.Message;
 import au.com.addstar.serversigns.commands.core.SubCommand;
 
-import java.util.Iterator;
-
 public class SubCommandResetAllCooldowns extends SubCommand {
     public SubCommandResetAllCooldowns(ServerSignsPlugin plugin) {
         super(plugin, "reset_all_cooldowns", "resetallcd", "Reset all ServerSigns cooldowns across all signs", "resetallcd", "cdra", "cooldownresetall", "cdresetall", "rcda", "resetcdall", "resetallcooldown");
@@ -14,9 +12,7 @@ public class SubCommandResetAllCooldowns extends SubCommand {
 
 
     public void execute(boolean verbose) {
-        Iterator<ServerSign> iterator = this.plugin.serverSignsManager.getSigns().iterator();
-        while (iterator.hasNext()) {
-            ServerSign sign = iterator.next();
+        for (ServerSign sign : this.plugin.serverSignsManager.getSigns()) {
             sign.setLastGlobalUse(0L);
             sign.getLastUse().clear();
             this.plugin.serverSignsManager.save(sign);

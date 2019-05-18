@@ -1,7 +1,5 @@
 package au.com.addstar.serversigns.hooks;
 
-import java.lang.reflect.Constructor;
-
 public class HookWrapper<E> {
     private E hook;
     private boolean hooked = false;

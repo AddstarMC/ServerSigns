@@ -113,10 +113,10 @@ public class ParseUtils {
         java.util.List<Integer> intList = new java.util.ArrayList();
         for (String st : s.split(",")) {
             if (!NumberUtils.isInt(st)) return null;
-            intList.add(Integer.valueOf(NumberUtils.parseInt(st)));
+            intList.add(NumberUtils.parseInt(st));
         }
         if (intList.size() < 3) return null;
-        return org.bukkit.Color.fromRGB(intList.get(0).intValue(), intList.get(1).intValue(), intList.get(2).intValue());
+        return org.bukkit.Color.fromRGB(intList.get(0), intList.get(1), intList.get(2));
     }
 
     public static class Alias {

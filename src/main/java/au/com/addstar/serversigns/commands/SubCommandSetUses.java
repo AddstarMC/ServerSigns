@@ -18,13 +18,13 @@ public class SubCommandSetUses extends SubCommand {
             return;
         }
 
-        int uses = argInt(0, Integer.valueOf(-1)).intValue();
+        int uses = argInt(0, -1);
         if (uses < 0) {
             if (verbose) msg(Message.USES_GREATER_ZERO);
             return;
         }
 
-        applyMeta(SVSMetaKey.USES, new SVSMetaValue(Integer.valueOf(uses)));
+        applyMeta(SVSMetaKey.USES, new SVSMetaValue(uses));
 
         if (verbose) {
             if (uses == 0) msg(Message.RIGHT_CLICK_REMOVE_USES);

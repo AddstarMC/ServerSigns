@@ -35,11 +35,7 @@ public class PlayerJoinTaskManager implements org.bukkit.event.Listener {
                     if (this.plugin.getServer().getPlayer(playerTask.getPlayerUniqueId()) != null) {
                         this.taskQueue.offer(playerTask);
                     } else {
-                        List<PlayerTask> playerTasks = this.playerJoinTasks.get(playerTask.getPlayerUniqueId());
-                        if (playerTasks == null) {
-                            playerTasks = new java.util.ArrayList();
-                            this.playerJoinTasks.put(playerTask.getPlayerUniqueId(), playerTasks);
-                        }
+                        List<PlayerTask> playerTasks = this.playerJoinTasks.computeIfAbsent(playerTask.getPlayerUniqueId(), k -> new java.util.ArrayList());
                         playerTasks.add(playerTask);
 
                         if (!playerTask.isPersisted()) {

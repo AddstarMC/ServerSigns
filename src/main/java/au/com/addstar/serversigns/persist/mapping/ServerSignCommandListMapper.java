@@ -22,24 +22,26 @@ public class ServerSignCommandListMapper implements ISmartPersistenceMapper<List
     }
 
     public List<ServerSignCommand> getValue(String path) throws MappingException {
-        List<ServerSignCommand> list = new ArrayList();
+        List<ServerSignCommand> list = new ArrayList<>();
 
         ConfigurationSection section = this.memorySection.getConfigurationSection(path);
         if (section == null) {
             if (!this.memorySection.contains("commands")) {
 
+
                 list.add(null);
                 return list;
             }
-            if ((this.memorySection.isList("commands")) && (this.memorySection.getStringList("commands").isEmpty())) {
+            if (this.memorySection.isList("commands") && this.memorySection.getStringList("commands").isEmpty()) {
                 return list;
             }
-            ServerSignsPlugin.log("Unable to load commands for " + this.host + " as it has not been updated! Please delete \"plugins/ServerSigns/signs/.svs_persist_version\" and restart the server.");
+            ServerSignsPlugin.log("Unable to load commands for " + this.host + " as it has not been updated! Please delete plugins/ServerSigns/signs/.svs_persist_version and restart the server.");
             return null;
         }
 
         for (String indexStr : section.getKeys(false)) {
             try {
+                ServerSignCommand cmd;
                 int index = Integer.parseInt(indexStr);
 
 
@@ -47,14 +49,14 @@ public class ServerSignCommandListMapper implements ISmartPersistenceMapper<List
                 CommandType type = CommandType.valueOf(subSection.getString("type"));
                 int interactValue = subSection.getInt("interactValue");
                 String command = subSection.getString("command");
-                ServerSignCommand cmd;
-                ServerSignCommand cmd;
-                if ((type == CommandType.CONDITIONAL_IF) || (type == CommandType.CONDITIONAL_ENDIF)) {
+
+                if (type == CommandType.CONDITIONAL_IF || type == CommandType.CONDITIONAL_ENDIF) {
                     try {
                         cmd = new ConditionalServerSignCommand(type, command);
                         cmd.setInteractValue(interactValue);
                     } catch (CommandParseException ex) {
                         ServerSignsPlugin.log("Encountered an error that is a result of manual file editing: Invalid conditional command defined in '" + this.host + "'");
+                        continue;
                     }
                 } else if (type == CommandType.RETURN) {
                     cmd = new ReturnServerSignCommand();
@@ -68,18 +70,20 @@ public class ServerSignCommandListMapper implements ISmartPersistenceMapper<List
                     cmd.setDelay(delay);
                     cmd.setAlwaysPersisted(alwaysPersisted);
                     cmd.setInteractValue(interactValue);
-                    if ((grantPerms != null) && (!grantPerms.isEmpty())) {
+                    if (grantPerms != null && !grantPerms.isEmpty()) {
                         cmd.setGrantPermissions(grantPerms);
                     }
                 }
 
                 if (index > list.size()) {
                     list.add(cmd);
-                } else if (index == list.size()) {
-                    list.add(index, cmd);
-                } else {
-                    list.set(index, cmd);
+                    continue;
                 }
+                if (index == list.size()) {
+                    list.add(index, cmd);
+                    continue;
+                }
+                list.set(index, cmd);
             } catch (Exception ex) {
                 throw new MappingException(ex.getMessage(), MappingException.ExceptionType.COMMANDS);
             }
@@ -97,10 +101,10 @@ public class ServerSignCommandListMapper implements ISmartPersistenceMapper<List
             ServerSignCommand cmd = value.get(k);
             this.memorySection.set(path + "." + k + ".command", cmd.getUnformattedCommand());
             this.memorySection.set(path + "." + k + ".type", cmd.getType().toString());
-            this.memorySection.set(path + "." + k + ".delay", Long.valueOf(cmd.getDelay()));
+            this.memorySection.set(path + "." + k + ".delay", cmd.getDelay());
             this.memorySection.set(path + "." + k + ".grantPerms", cmd.getGrantPermissions());
-            this.memorySection.set(path + "." + k + ".alwaysPersisted", Boolean.valueOf(cmd.isAlwaysPersisted()));
-            this.memorySection.set(path + "." + k + ".interactValue", Integer.valueOf(cmd.getInteractValue()));
+            this.memorySection.set(path + "." + k + ".alwaysPersisted", cmd.isAlwaysPersisted());
+            this.memorySection.set(path + "." + k + ".interactValue", cmd.getInteractValue());
         }
     }
 

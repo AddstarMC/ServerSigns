@@ -13,7 +13,7 @@ public class SubCommandResetCooldown extends SubCommand {
 
 
     public void execute(boolean verbose) {
-        applyMeta(SVSMetaKey.COOLDOWN_RESET, new SVSMetaValue(Boolean.valueOf(true)));
+        applyMeta(SVSMetaKey.COOLDOWN_RESET, new SVSMetaValue(Boolean.TRUE));
         if (verbose) msg(Message.RIGHT_CLICK_RESET_COOLDOWN);
     }
 }

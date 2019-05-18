@@ -18,13 +18,13 @@ public class SubCommandXP extends SubCommand {
             return;
         }
 
-        int levels = argInt(0, Integer.valueOf(-1)).intValue();
+        int levels = argInt(0, -1);
         if (levels < 0) {
             if (verbose) msg(Message.XP_COST_INVALID);
             return;
         }
 
-        applyMeta(SVSMetaKey.XP, new SVSMetaValue(Integer.valueOf(levels)));
+        applyMeta(SVSMetaKey.XP, new SVSMetaValue(levels));
         if (verbose) msg(Message.XP_COST_BIND);
     }
 }

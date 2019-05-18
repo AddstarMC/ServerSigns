@@ -13,7 +13,7 @@ public class SubCommandCreate extends SubCommand {
 
 
     public void execute(boolean verbose) {
-        applyMeta(SVSMetaKey.CREATE, new SVSMetaValue(Integer.valueOf(1)));
+        applyMeta(SVSMetaKey.CREATE, new SVSMetaValue(1));
         if (verbose) msg(Message.RIGHT_CLICK_CREATE);
     }
 }

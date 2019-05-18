@@ -96,7 +96,7 @@ public class ServerSignManager {
                     continue;
                 }
 
-                HashMap<String, Long> toKeep = new HashMap<String, Long>();
+                HashMap<String, Long> toKeep = new HashMap<>();
                 for (Map.Entry<String, Long> entry : sign.getLastUse().entrySet()) {
                     if (entry.getValue() + sign.getCooldown() * 1000L > System.currentTimeMillis()) {
                         toKeep.put(entry.getKey(), entry.getValue());

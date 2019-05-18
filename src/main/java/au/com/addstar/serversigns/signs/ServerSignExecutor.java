@@ -62,11 +62,7 @@ public class ServerSignExecutor {
 
 
             if (!looped) {
-                if (this.plugin.hookManager.noCheatPlus.isHooked()) {
-                    this.plugin.hookManager.noCheatPlus.getHook().exemptTemporarily(player, "CHAT_COMMANDS", 40L);
-                }
-
-                List<TaskManagerTask> tasks = new ArrayList();
+                List<TaskManagerTask> tasks = new ArrayList<>();
 
 
                 List<PermissionGrantPlayerTask> grantTasks = null;

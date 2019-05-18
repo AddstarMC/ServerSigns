@@ -21,31 +21,29 @@ public class SubCommandOption extends SubCommand {
         String param1 = arg(1);
 
         SVSMetaValue[] values;
-
+        int optionId;
         if ((param1.equalsIgnoreCase("question")) || (param1.equalsIgnoreCase("q"))) {
             if (!argSet(2)) {
                 msg("/" + getLastLabel() + " option " + arg(0) + " " + arg(1) + " <question to ask player>");
                 return;
             }
-            int optionId = 0;
+            optionId = 0;
             values = new SVSMetaValue[]{null, null, new SVSMetaValue(loopArgs(2))};
         } else {
-            SVSMetaValue[] values;
             if ((param1.equalsIgnoreCase("add")) || (param1.equalsIgnoreCase("a"))) {
                 if (!argSet(3)) {
                     msg("/" + getLastLabel() + " option " + arg(0) + " " + arg(1) + " <answer label> <description>");
                     return;
                 }
-                int optionId = 1;
+                optionId = 1;
                 values = new SVSMetaValue[]{null, null, new SVSMetaValue(arg(2)), new SVSMetaValue(loopArgs(3))};
             } else {
-                SVSMetaValue[] values;
                 if ((param1.equalsIgnoreCase("remove")) || (param1.equalsIgnoreCase("r"))) {
                     if (!argSet(2)) {
                         msg("/" + getLastLabel() + " option " + arg(0) + " " + arg(1) + " <answer label>");
                         return;
                     }
-                    int optionId = 2;
+                    optionId = 2;
                     values = new SVSMetaValue[]{null, null, new SVSMetaValue(arg(2))};
                 } else {
                     if (verbose) sendUsage();
@@ -54,7 +52,7 @@ public class SubCommandOption extends SubCommand {
             }
         }
         values[0] = new SVSMetaValue(displayName);
-        values[1] = new SVSMetaValue(Integer.valueOf(optionId));
+        values[1] = new SVSMetaValue(optionId);
 
         applyMeta(SVSMetaKey.OPTION, values);
         msg(Message.RIGHT_CLICK_APPLY);
