@@ -5,9 +5,12 @@ import au.com.addstar.serversigns.commands.core.Command;
 import au.com.addstar.serversigns.meta.SVSMeta;
 import au.com.addstar.serversigns.meta.SVSMetaKey;
 import au.com.addstar.serversigns.meta.SVSMetaManager;
+import au.com.addstar.serversigns.meta.SVSMetaValue;
 import au.com.addstar.serversigns.signs.ServerSign;
 import au.com.addstar.serversigns.commands.core.CommandException;
 import au.com.addstar.serversigns.commands.core.SubCommand;
+
+import java.util.UUID;
 
 public class CommandServerSigns extends Command {
     public CommandServerSigns(ServerSignsPlugin instance) {
@@ -91,8 +94,8 @@ public class CommandServerSigns extends Command {
 
             match.execute(this.sender, this.args.subList(1, this.args.size()), commandLabel, true);
 
-            java.util.UUID id = (this.player == null) ? null : this.player.getUniqueId();
-            if (id == null || ((SVSMetaManager.hasSpecialMeta(id, SVSMetaKey.SELECT)) && (SVSMetaManager.hasMeta(id)))) {
+            UUID id = (this.player == null) ? SVSMetaManager.CONSOLE_UUID : this.player.getUniqueId();
+            if (((SVSMetaManager.hasSpecialMeta(id, SVSMetaKey.SELECT)) && (SVSMetaManager.hasMeta(id)))) {
                 this.plugin.adminListener.handleAdminInteract(SVSMetaManager.getSpecialMeta(id).getValue().asLocation(), this.sender, id);
             }
             return;

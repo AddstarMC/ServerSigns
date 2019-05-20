@@ -9,6 +9,8 @@ import au.com.addstar.serversigns.commands.core.SubCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
+import java.util.UUID;
+
 public class CommandServerSignsRemote extends Command {
     public CommandServerSignsRemote(ServerSignsPlugin instance) {
         super("serversignsremote", instance);
@@ -97,8 +99,8 @@ public class CommandServerSignsRemote extends Command {
 
             match.execute(this.sender, this.args.subList(2, this.args.size()), this.label, false);
 
-            java.util.UUID id = this.player == null ? null : this.player.getUniqueId();
-            if (id == null || SVSMetaManager.hasMeta(id)) {
+            UUID id = this.player == null ? SVSMetaManager.CONSOLE_UUID : this.player.getUniqueId();
+            if (SVSMetaManager.hasMeta(id)) {
                 this.plugin.adminListener.handleAdminInteract(remoteLocation, this.sender, id);
             }
             return;

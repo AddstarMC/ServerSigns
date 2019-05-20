@@ -73,8 +73,8 @@ public class ExecutableSVSR {
         if (match != null) {
             match.execute(player, parts.subList(1, parts.size()), "", false);
 
-            java.util.UUID id = (player == null) ? null : player.getUniqueId();
-            if (id == null || SVSMetaManager.hasMeta(id)) {
+            java.util.UUID id = (player == null) ? SVSMetaManager.CONSOLE_UUID : player.getUniqueId();
+            if (SVSMetaManager.hasMeta(id)) {
                 this.plugin.adminListener.handleAdminInteract(signLocation, player, id);
             }
         } else {
