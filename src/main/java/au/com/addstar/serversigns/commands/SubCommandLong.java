@@ -31,7 +31,7 @@ public class SubCommandLong extends SubCommand {
                 command = command + " " + val.asString();
             }
             command = command.trim();
-            if (!CommandUtils.isCommandSafe(command, this.plugin, this.sender)) {
+            if (CommandUtils.isCommandUnsafe(command, this.plugin, this.sender)) {
                 return;
             }
 

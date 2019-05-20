@@ -13,7 +13,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class CommandUtils {
-    public static boolean isCommandSafe(String command, ServerSignsPlugin plugin, CommandSender executor) {
+    public static boolean isCommandUnsafe(String command, ServerSignsPlugin plugin, CommandSender executor) {
         String rawCmd = command.trim();
         if ((rawCmd.startsWith("*")) || (rawCmd.startsWith("/")))
             rawCmd = rawCmd.substring(1);
@@ -22,10 +22,10 @@ public class CommandUtils {
         }
         if (plugin.config.getBlockedCommands().contains(rawCmd.toLowerCase())) {
             plugin.send(executor, Message.BLOCKED_COMMAND);
-            return false;
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     public static void applyServerSignCommandMeta(String command, ServerSignsPlugin plugin, CommandSender executor, boolean verbose, SVSMetaKey key, SVSMetaValue... precursingValues) {

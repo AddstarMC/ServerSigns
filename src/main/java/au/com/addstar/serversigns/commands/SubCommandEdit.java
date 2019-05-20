@@ -24,7 +24,7 @@ public class SubCommandEdit extends SubCommand {
         }
 
         String command = loopArgs(1);
-        if (!CommandUtils.isCommandSafe(command, this.plugin, this.sender)) {
+        if (CommandUtils.isCommandUnsafe(command, this.plugin, this.sender)) {
             return;
         }
 

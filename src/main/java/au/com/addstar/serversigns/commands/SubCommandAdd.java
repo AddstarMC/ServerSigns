@@ -17,7 +17,7 @@ public class SubCommandAdd extends SubCommand {
         }
 
         String command = loopArgs(0);
-        if (!CommandUtils.isCommandSafe(command, this.plugin, this.sender)) {
+        if (CommandUtils.isCommandUnsafe(command, this.plugin, this.sender)) {
             return;
         }
 
