@@ -31,7 +31,7 @@ public class ItemLore extends ItemData implements IItemData {
 
     public ItemMeta applyMetaValue(ItemMeta meta, String value) throws DataException {
         if (!value.isEmpty()) {
-            List<String> lores = meta.hasLore() ? meta.getLore() : new ArrayList();
+            List<String> lores = (meta.hasLore()) ? meta.getLore() : new ArrayList<>();
             lores.add(ChatColor.translateAlternateColorCodes('&', value.replaceAll("_", " ")));
             meta.setLore(lores);
 

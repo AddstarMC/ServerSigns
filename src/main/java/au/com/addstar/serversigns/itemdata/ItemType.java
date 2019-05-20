@@ -1,5 +1,6 @@
 package au.com.addstar.serversigns.itemdata;
 
+import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -16,7 +17,7 @@ public class ItemType extends ItemData implements IItemData {
 
     public ItemStack applyValue(ItemStack item, String value)
             throws DataException {
-        org.bukkit.Material mat = org.bukkit.Material.getMaterial(value);
+        Material mat = Material.getMaterial(value);
         if (mat == null) {
             throw new DataException(value + " is not a valid ItemStack type!");
         }

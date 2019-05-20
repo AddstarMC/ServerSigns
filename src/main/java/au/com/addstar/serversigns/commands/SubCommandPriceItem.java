@@ -23,12 +23,12 @@ public class SubCommandPriceItem extends SubCommand {
         }
         ItemStack item;
         if (arg(0).equalsIgnoreCase("hand")) {
-            if ((this.player.getItemInHand() == null) || (this.player.getItemInHand().getType().equals(org.bukkit.Material.AIR))) {
+            if (this.player.getInventory().getItemInMainHand().getType().equals(org.bukkit.Material.AIR)) {
                 if (verbose) msg(Message.INVALID_HAND_ITEM);
                 return;
             }
 
-            item = this.player.getItemInHand();
+            item = this.player.getInventory().getItemInMainHand();
         } else {
             if ((arg(0).equalsIgnoreCase("0")) || (arg(0).equalsIgnoreCase("off"))) {
                 applyMeta(SVSMetaKey.PRICE_ITEM, new SVSMetaValue(null));

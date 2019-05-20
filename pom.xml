@@ -9,7 +9,7 @@
     <version>5.0.0-SNAPSHOT</version>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spigot.api>1.13</spigot.api>
+        <spigot.api.version>1.13</spigot.api.version>
         <bukkit.version>1.14-R0.1-SNAPSHOT</bukkit.version>
         <build.number/>
         <plugin.version>${project.version}-${build.number}</plugin.version>

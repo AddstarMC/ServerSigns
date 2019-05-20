@@ -1,6 +1,7 @@
 name: ServerSigns
 main: de.czymm.serversigns.ServerSignsPlugin
 version: ${plugin.version}
+api-version: ${spigot.api.version}
 authors: [CalibeR50, Exloki, Narimm]
 softdepend: [Vault]
 load: POSTWORLD
