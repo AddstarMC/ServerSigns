@@ -1,25 +1,20 @@
 name: ServerSigns
 main: de.czymm.serversigns.ServerSignsPlugin
-version: 4.5.1
-authors: [CalibeR50, Exloki]
-softdepend: [Vault, NoCheatPlus, Essentials]
+version: ${plugin.version}
+authors: [CalibeR50, Exloki, Narimm]
+softdepend: [Vault]
 load: POSTWORLD
-description: >
-             ServerSigns
+description: ServerSigns
 commands:
-
   serversigns:
     description: The main ServerSigns plugin command
     aliases: svs
     usage: /<command>
-
   serversignsremote:
     description: Allows remote modification of ServerSigns
     aliases: svsr
     usage: /<command>
-    
 permissions:
-
     serversigns.admin:
         description: Gives access to all ServerSigns commands
         default: op
@@ -55,10 +50,8 @@ permissions:
           serversigns.command.silent: true
           serversigns.command.void: true
           serversigns.command.xp: true
-          
     serversigns.use:
         description: Allows you to use a ServerSign
-        
     serversigns.updatenotification:
         default: op
         description: Allows you to see update notifications

@@ -7,6 +7,13 @@
     <groupId>de.czymm.serversigns</groupId>
     <artifactId>ServerSigns</artifactId>
     <version>5.0.0-SNAPSHOT</version>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <spigot.api>1.13</spigot.api>
+        <bukkit.version>1.14-R0.1-SNAPSHOT</bukkit.version>
+        <build.number/>
+        <plugin.version>${project.version}-${build.number}</plugin.version>
+    </properties>
     <build>
         <sourceDirectory>src/main/java</sourceDirectory>
         <plugins>
@@ -28,7 +35,11 @@
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
+                <targetPath>.</targetPath>
                 <filtering>true</filtering>
+                <includes>
+                    <include>*.yml</include>
+                </includes>
             </resource>
         </resources>
     </build>
@@ -52,7 +63,7 @@
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
-            <version>1.14-R0.1-SNAPSHOT</version>
+            <version>${bukkit.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
