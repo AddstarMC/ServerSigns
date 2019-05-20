@@ -1,5 +1,5 @@
 name: ServerSigns
-main: de.czymm.serversigns.ServerSignsPlugin
+main:  au.com.addstar.serversigns.ServerSignsPlugin
 version: ${plugin.version}
 api-version: ${spigot.api.version}
 authors: [CalibeR50, Exloki, Narimm]
