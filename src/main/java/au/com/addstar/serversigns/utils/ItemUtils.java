@@ -55,16 +55,12 @@ public class ItemUtils {
     }
 
     public static boolean compare(ItemStack item1, ItemStack item2, ItemSearchCriteria criteria) {
-        return compare(item1, item2, false, criteria.getIgnoreDurability(), false, criteria.getIgnoreName(), criteria.getIgnoreLore(), criteria.getEnchantsCriteria());
+        return compare(item1, item2, false, false, criteria.getIgnoreName(), criteria.getIgnoreLore(), criteria.getEnchantsCriteria());
     }
 
-    public static boolean compare(ItemStack item1, ItemStack item2, boolean ignoreMaterial, boolean ignoreDurability, boolean ignoreAmount, boolean ignoreName, boolean ignoreLores, boolean ignoreEnchants) {
+    public static boolean compare(ItemStack item1, ItemStack item2, boolean ignoreMaterial, boolean ignoreAmount, boolean ignoreName, boolean ignoreLores, boolean ignoreEnchants) {
         if ((!ignoreMaterial) &&
                 (item1.getType() != item2.getType())) {
-            return false;
-        }
-        if ((!ignoreDurability) &&
-                (item1.getDurability() != item2.getDurability())) {
             return false;
         }
         if ((!ignoreAmount) &&
@@ -104,8 +100,8 @@ public class ItemUtils {
     }
 
     public static ArrayList<String> getDescription(ItemStack item, String messageColour) {
-        ArrayList<String> list = new ArrayList(8);
-        list.add(messageColour + "" + item.getAmount() + "x " + getFriendlyName(item.getType()) + (item.getDurability() > 0 ? ":" + item.getDurability() : ""));
+        ArrayList<String> list = new ArrayList<>(8);
+        list.add(messageColour + "" + item.getAmount() + "x " + getFriendlyName(item.getType()));
 
         if (item.hasItemMeta()) {
             ItemMeta meta = item.getItemMeta();

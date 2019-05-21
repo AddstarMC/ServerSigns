@@ -30,7 +30,7 @@ public class ReturnServerSignCommand extends ServerSignCommand {
     }
 
     public List<String> getGrantPermissions() {
-        return new ArrayList();
+        return  new ArrayList<>();
     }
 
     public void setGrantPermissions(List<String> grant) {
@@ -52,12 +52,8 @@ public class ReturnServerSignCommand extends ServerSignCommand {
     }
 
     public List<TaskManagerTask> getTasks(Player executor, ServerSignsPlugin plugin, Map<String, String> injectedReplacements) {
-        return new ArrayList();
+        return  new ArrayList<>();
     }
 }
 
 
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\parsing\command\ReturnServerSignCommand.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

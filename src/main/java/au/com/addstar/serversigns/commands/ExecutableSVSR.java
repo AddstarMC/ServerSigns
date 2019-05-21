@@ -8,12 +8,13 @@ import au.com.addstar.serversigns.translations.Message;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 public class ExecutableSVSR {
-    protected ArrayList<SubCommand> subCommands = new ArrayList();
+    protected ArrayList<SubCommand> subCommands = new ArrayList<>();
     private ServerSignsPlugin plugin;
 
     public ExecutableSVSR(ServerSignsPlugin instance) {
@@ -71,9 +72,10 @@ public class ExecutableSVSR {
 
         SubCommand match = matchSubCommand(parts.get(0));
         if (match != null) {
+            plugin.debug("Command Match :" +match.toString());
             match.execute(player, parts.subList(1, parts.size()), "", false);
-
-            java.util.UUID id = (player == null) ? SVSMetaManager.CONSOLE_UUID : player.getUniqueId();
+            plugin.debug("Execute Complete for Match :" +match.toString());
+            UUID id = (player == null) ? SVSMetaManager.CONSOLE_UUID : player.getUniqueId();
             if (SVSMetaManager.hasMeta(id)) {
                 this.plugin.adminListener.handleAdminInteract(signLocation, player, id);
             }
@@ -84,7 +86,3 @@ public class ExecutableSVSR {
 }
 
 
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\commands\ExecutableSVSR.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

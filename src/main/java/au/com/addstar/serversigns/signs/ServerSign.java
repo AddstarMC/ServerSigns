@@ -5,8 +5,10 @@ import au.com.addstar.serversigns.itemdata.ItemSearchCriteria;
 import au.com.addstar.serversigns.parsing.command.ServerSignCommand;
 import au.com.addstar.serversigns.persist.PersistenceEntry;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.UUID;
@@ -17,9 +19,9 @@ import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.Attachable;
 
-public class ServerSign implements Cloneable, java.io.Serializable {
+public class ServerSign implements Cloneable, Serializable {
     @PersistenceEntry
-    private java.util.List<String> permissions = new ArrayList();
+    private java.util.List<String> permissions =  new ArrayList<>();
     @PersistenceEntry
     private String permissionMessage = "";
 
@@ -49,7 +51,7 @@ public class ServerSign implements Cloneable, java.io.Serializable {
     @PersistenceEntry
     private long lastGlobalUse = 0L;
     @PersistenceEntry(configMapper = StringLongHashMapper.class)
-    private HashMap<String, Long> lastUse = new HashMap();
+    private HashMap<String, Long> lastUse =  new HashMap<>();
 
     @PersistenceEntry
     private boolean confirmation = false;
@@ -60,20 +62,20 @@ public class ServerSign implements Cloneable, java.io.Serializable {
     private CancelMode cancel = CancelMode.ALWAYS;
 
     @PersistenceEntry(configMapper = ServerSignCommandListMapper.class)
-    private ArrayList<ServerSignCommand> commands = new ArrayList();
+    private ArrayList<ServerSignCommand> commands =  new ArrayList<>();
 
     @PersistenceEntry
-    private ArrayList<String> grantPermissions = new ArrayList();
+    private ArrayList<String> grantPermissions =  new ArrayList<>();
 
     @PersistenceEntry(configMapper = ItemStackListMapper.class)
-    private ArrayList<ItemStack> priceItems = new ArrayList();
+    private ArrayList<ItemStack> priceItems =  new ArrayList<>();
     @PersistenceEntry(configMapper = ItemStackListMapper.class)
-    private ArrayList<ItemStack> heldItems = new ArrayList();
+    private ArrayList<ItemStack> heldItems =  new ArrayList<>();
 
     @PersistenceEntry(configMapper = ItemSearchCriteriaMapper.class, configPath = "pi_criteria")
-    private ItemSearchCriteria pic_options = new ItemSearchCriteria(false, false, false, false);
+    private ItemSearchCriteria pic_options = new ItemSearchCriteria(false, false, false);
     @PersistenceEntry(configMapper = ItemSearchCriteriaMapper.class, configPath = "hi_criteria")
-    private ItemSearchCriteria hic_options = new ItemSearchCriteria(false, false, false, false);
+    private ItemSearchCriteria hic_options = new ItemSearchCriteria(false, false, false);
 
     @PersistenceEntry
     private int loops = -1;
@@ -87,7 +89,7 @@ public class ServerSign implements Cloneable, java.io.Serializable {
     private int useTally = 0;
 
     @PersistenceEntry(configMapper = LocationSetMapper.class)
-    private Set<Location> protectedBlocks = new java.util.HashSet();
+    private Set<Location> protectedBlocks =  new HashSet<>();
 
     @PersistenceEntry
     private boolean displayInternalMessages = true;
@@ -99,7 +101,7 @@ public class ServerSign implements Cloneable, java.io.Serializable {
     private long timeLimitMinimum = 0L;
 
     @PersistenceEntry(configMapper = PlayerInputOptionsMapper.class)
-    private Set<PlayerInputOptions> playerInputOptions = new java.util.HashSet();
+    private Set<PlayerInputOptions> playerInputOptions =  new HashSet<>();
 
 
     public ServerSign() {
@@ -327,7 +329,7 @@ public class ServerSign implements Cloneable, java.io.Serializable {
     }
 
     public ArrayList<String> getPriceItemStrings() {
-        ArrayList<String> list = new ArrayList(this.priceItems.size());
+        ArrayList<String> list =  new ArrayList<>(this.priceItems.size());
         for (ItemStack stack : this.priceItems) {
             list.add(ItemUtils.getStringFromItemStack(stack));
         }
@@ -408,7 +410,7 @@ public class ServerSign implements Cloneable, java.io.Serializable {
     }
 
     public ArrayList<String> getHeldItemStrings() {
-        ArrayList<String> list = new ArrayList(this.heldItems.size());
+        ArrayList<String> list = new ArrayList<>(this.heldItems.size());
         for (ItemStack stack : this.heldItems) {
             list.add(ItemUtils.getStringFromItemStack(stack));
         }
@@ -583,7 +585,3 @@ public class ServerSign implements Cloneable, java.io.Serializable {
 }
 
 
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\signs\ServerSign.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

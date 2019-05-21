@@ -1,7 +1,6 @@
 package au.com.addstar.serversigns.config;
 
 import au.com.addstar.serversigns.persist.mapping.BlocksMapper;
-import au.com.addstar.serversigns.legacy.OldServerSignsConfig;
 import au.com.addstar.serversigns.persist.PersistenceEntry;
 import au.com.addstar.serversigns.persist.mapping.ColouredStringMapper;
 
@@ -16,6 +15,7 @@ import java.util.regex.PatternSyntaxException;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class ServerSignsConfig implements IServerSignsConfig {
     @PersistenceEntry(configMapper = BlocksMapper.class, comments = {"# A list of material names (should be in the Bukkit/Spigot Material enum form)", "# These materials define the blocks which can be used with ServerSigns", "# Refer to this page for the list: https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html"})
     private EnumSet<Material> blocks = EnumSet.of(Material.OAK_WALL_SIGN, Material.OAK_SIGN);
@@ -87,7 +87,8 @@ public class ServerSignsConfig implements IServerSignsConfig {
 
     @PersistenceEntry(comments = {"# The Regular Expression pattern used when determining which tasks to cancel upon a player's death", "# This Regex pattern will be used to compare each pending command a player has on their death; matching commands will be cancelled"})
     private String cancel_tasks_regex_pattern = "warp .*";
-
+    @PersistenceEntry(comments = {"Enabled for debugging"})
+    private boolean debugging = false;
 
     @PersistenceEntry(comments = {"# The number of hours your timezone is offset from GMT/UTC - must be an integer between -12 and 12"})
     private int time_zone_offset = 0;
@@ -210,35 +211,14 @@ public class ServerSignsConfig implements IServerSignsConfig {
         this.time_zone_offset = ((int) TimeUnit.MILLISECONDS.toHours(TimeZone.getDefault().getRawOffset()));
     }
 
-    public void setFromOldConfig(OldServerSignsConfig oldConfig) {
-        this.blocks = oldConfig.getBlocks();
-        this.language = oldConfig.getLanguage();
-        this.message_prefix = oldConfig.getMessageTag();
-        this.message_colour = oldConfig.getMessageColour();
-        this.vault_grant = oldConfig.getVaultGrant();
-        this.permission_add_command = oldConfig.getPermissionConsoleCommandAdd();
-        this.permission_remove_command = oldConfig.getPermissionConsoleCommandRemove();
-        this.sneak_to_destroy = oldConfig.getMustBeSneakingToDestroy();
-        this.show_funds_removed_message = oldConfig.getShowFundsRemovedMessage();
-        this.currency_string = oldConfig.getCurrency();
-        this.broadcast_developers = oldConfig.getBroadcastDevelopers();
-        this.check_for_updates = oldConfig.getAutomaticUpdateChecks();
-        this.disable_command_logging = oldConfig.getDisableConsoleCommandLogging();
-        this.allow_left_clicking = oldConfig.getAllowLeftClicking();
-        this.send_payments_to_bank = oldConfig.getSendPaymentsToBank();
-        this.deposit_bank_name = oldConfig.getDepositBankName();
-        this.alternate_command_dispatching = oldConfig.getAlternateCommandDispatching();
-        this.blocked_commands = oldConfig.getBlockedCommands();
-        colourise();
-    }
 
     public int getVersion() {
         return 3;
     }
+
+    public boolean isDebugging() {
+        return debugging;
+    }
 }
 
 
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\config\ServerSignsConfig.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

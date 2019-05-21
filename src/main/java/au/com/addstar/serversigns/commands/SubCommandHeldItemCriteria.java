@@ -30,7 +30,3 @@ public class SubCommandHeldItemCriteria extends SubCommand {
 }
 
 
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\commands\SubCommandHeldItemCriteria.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

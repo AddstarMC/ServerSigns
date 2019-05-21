@@ -2,6 +2,7 @@ package au.com.addstar.serversigns.persist.mapping;
 
 import au.com.addstar.serversigns.signs.PlayerInputOptions;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.bukkit.configuration.MemorySection;
@@ -17,7 +18,7 @@ public class PlayerInputOptionsMapper implements IPersistenceMapper<Set<PlayerIn
         if (!this.memorySection.contains(path)) {
             return null;
         }
-        Set<PlayerInputOptions> optionSet = new java.util.HashSet();
+        Set<PlayerInputOptions> optionSet = new HashSet<>();
         for (String optionSetName : this.memorySection.getConfigurationSection(path).getKeys(false)) {
             PlayerInputOptions options = new PlayerInputOptions(optionSetName);
             options.setQuestion(this.memorySection.getString(path + "." + optionSetName + ".question"));
@@ -42,7 +43,3 @@ public class PlayerInputOptionsMapper implements IPersistenceMapper<Set<PlayerIn
 }
 
 
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\persist\mapping\PlayerInputOptionsMapper.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

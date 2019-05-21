@@ -6,6 +6,8 @@ import au.com.addstar.serversigns.parsing.command.ServerSignCommand;
 import au.com.addstar.serversigns.utils.TimeUtils;
 import au.com.addstar.serversigns.parsing.command.ConditionalServerSignCommand;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +16,7 @@ import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
 public class ServerSignCommandFactory {
-    private static final Map<CommandType, AliasSet> TYPE_ALIAS_MAP = new java.util.HashMap();
+    private static final Map<CommandType, AliasSet> TYPE_ALIAS_MAP = new HashMap<>();
     private static final Pattern PERMISSION_PATTERN = Pattern.compile("\\[p:([\\S]*)\\]");
     private static final Pattern DELAY_PATTERN = Pattern.compile("\\[d:(\\d*)(\\w*)\\]");
     private static final Pattern AP_PATTERN = Pattern.compile("\\[ap:(\\w*)\\]");
@@ -65,7 +67,7 @@ public class ServerSignCommandFactory {
         }
 
 
-        List<String> permissions = new java.util.ArrayList();
+        List<String> permissions =  new ArrayList<>();
         if ((matcher = PERMISSION_PATTERN.matcher(input)).find()) {
             if (!matcher.group(1).isEmpty()) {
                 if (matcher.group(1).contains("|")) {
@@ -178,7 +180,3 @@ public class ServerSignCommandFactory {
 }
 
 
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\parsing\ServerSignCommandFactory.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

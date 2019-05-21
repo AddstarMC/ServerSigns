@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 
 
 public abstract class ConditionalOperator {
-    public static final Set<ConditionalOperator> VALUES = new HashSet();
+    public static final Set<ConditionalOperator> VALUES = new HashSet<>();
 
     static {
         VALUES.add(new HasPermOperator());
@@ -99,7 +99,3 @@ public abstract class ConditionalOperator {
 }
 
 
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\parsing\operators\ConditionalOperator.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

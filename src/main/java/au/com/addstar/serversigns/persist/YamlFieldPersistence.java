@@ -14,7 +14,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 public class YamlFieldPersistence {
     public static <E> void loadFromYaml(YamlConfiguration yaml, E instance) throws PersistenceException, MappingException {
-        Map<Class<?>, IPersistenceMapper<?>> configMapperBuffer = new HashMap();
+        Map<Class<?>, IPersistenceMapper<?>> configMapperBuffer =  new HashMap<>();
         loadClassFromYaml(yaml, configMapperBuffer, instance.getClass(), instance);
 
         Class<?> superClass = instance.getClass().getSuperclass();
@@ -63,7 +63,7 @@ public class YamlFieldPersistence {
     }
 
     public static <E> void saveToYaml(YamlConfiguration yaml, E instance) throws PersistenceException {
-        Map<Class<?>, IPersistenceMapper<?>> configMapperBuffer = new HashMap();
+        Map<Class<?>, IPersistenceMapper<?>> configMapperBuffer =  new HashMap<>();
         saveClassToYaml(yaml, configMapperBuffer, instance.getClass(), instance);
 
         Class<?> superClass = instance.getClass().getSuperclass();
@@ -107,7 +107,3 @@ public class YamlFieldPersistence {
 }
 
 
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\persist\YamlFieldPersistence.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

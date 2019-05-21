@@ -7,13 +7,15 @@ import au.com.addstar.serversigns.parsing.operators.ConditionalOperator;
 import au.com.addstar.serversigns.signs.ServerSign;
 import au.com.addstar.serversigns.taskmanager.TaskManagerTask;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
 import org.bukkit.entity.Player;
 
 public class ConditionalServerSignCommand extends ServerSignCommand {
-    private java.util.Set<ConditionalOperator> conditionalOperators = new java.util.HashSet();
+    private java.util.Set<ConditionalOperator> conditionalOperators = new HashSet<>();
 
     public ConditionalServerSignCommand(CommandType type, String command) throws CommandParseException {
         super(type, command);
@@ -85,7 +87,7 @@ public class ConditionalServerSignCommand extends ServerSignCommand {
     }
 
     public List<String> getGrantPermissions() {
-        return new java.util.ArrayList();
+        return new ArrayList<>();
     }
 
     public void setGrantPermissions(List<String> grant) {
@@ -107,12 +109,8 @@ public class ConditionalServerSignCommand extends ServerSignCommand {
     }
 
     public List<TaskManagerTask> getTasks(Player executor, ServerSignsPlugin plugin, Map<String, String> injectedReplacements) {
-        return new java.util.ArrayList();
+        return new ArrayList<>();
     }
 }
 
 
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\parsing\command\ConditionalServerSignCommand.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

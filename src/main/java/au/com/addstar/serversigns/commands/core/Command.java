@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 
 public abstract class Command extends AbstractCommand {
     protected final String name;
-    protected ArrayList<SubCommand> subCommands = new ArrayList();
+    protected ArrayList<SubCommand> subCommands = new ArrayList<>();
 
     protected String label;
     protected boolean isConsole;

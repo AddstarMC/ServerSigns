@@ -8,6 +8,7 @@ import au.com.addstar.serversigns.meta.SVSMetaValue;
 import au.com.addstar.serversigns.commands.core.SubCommand;
 import au.com.addstar.serversigns.translations.Message;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SubCommandSetPermission extends SubCommand {
@@ -29,7 +30,7 @@ public class SubCommandSetPermission extends SubCommand {
         }
 
         StringBuilder message = new StringBuilder();
-        List<String> perms = new java.util.ArrayList();
+        List<String> perms =  new ArrayList<>();
         boolean b = false;
         for (String arg : this.args) {
             if ((arg.toLowerCase().contains("serversigns.use")) &&
@@ -62,7 +63,3 @@ public class SubCommandSetPermission extends SubCommand {
 }
 
 
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\commands\SubCommandSetPermission.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

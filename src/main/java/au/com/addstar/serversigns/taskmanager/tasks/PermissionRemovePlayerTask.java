@@ -50,7 +50,3 @@ public class PermissionRemovePlayerTask extends PlayerTask<PermissionRemovePlaye
 }
 
 
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\taskmanager\tasks\PermissionRemovePlayerTask.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

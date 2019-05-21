@@ -29,7 +29,3 @@ public class SubCommandConfirmation extends SubCommand {
 }
 
 
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\commands\SubCommandConfirmation.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

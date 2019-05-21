@@ -14,23 +14,23 @@ import org.bukkit.inventory.ItemStack;
 
 public class InventoryUtils {
     public static Collection<ItemStack> scan(Inventory inventory, ItemSearchCriteria criteria, boolean removeOnFind, ItemStack... items) {
-        return scan(inventory, criteria.getIgnoreDurability(), criteria.getEnchantsCriteria(), criteria.getIgnoreLore(), criteria.getIgnoreName(), removeOnFind, items);
+        return scan(inventory, criteria.getEnchantsCriteria(), criteria.getIgnoreLore(), criteria.getIgnoreName(), removeOnFind, items);
     }
 
 
-    public static Collection<ItemStack> scan(Inventory inventory, boolean ignoreDurability, boolean ignoreEnchants, boolean ignoreLores, boolean ignoreName, boolean removeOnFind, ItemStack... items) {
+    public static Collection<ItemStack> scan(Inventory inventory, boolean ignoreEnchants, boolean ignoreLores, boolean ignoreName, boolean removeOnFind, ItemStack... items) {
         Validate.notNull(items, "Items cannot be null");
         Validate.notNull(inventory, "Inventory cannot be null");
 
         Inventory clone = cloneInventory(inventory);
-        HashMap<Integer, ItemStack> leftover = new HashMap();
+        HashMap<Integer, ItemStack> leftover = new HashMap<>();
 
         for (int i = 0; i < items.length; i++) {
             ItemStack item = items[i].clone();
             int toDelete = item.getAmount();
 
             while (toDelete > 0) {
-                int first = first(clone, item, true, ignoreDurability, ignoreEnchants, ignoreLores, ignoreName);
+                int first = first(clone, item, true, ignoreEnchants, ignoreLores, ignoreName);
 
                 if (first < 0) {
                     item.setAmount(toDelete);
@@ -57,14 +57,14 @@ public class InventoryUtils {
         return leftover.values();
     }
 
-    public static int first(Inventory inventory, ItemStack item, boolean ignoreAmount, boolean ignoreDurability, boolean ignoreEnchants, boolean ignoreLores, boolean ignoreName) {
+    public static int first(Inventory inventory, ItemStack item, boolean ignoreAmount, boolean ignoreEnchants, boolean ignoreLores, boolean ignoreName) {
         Validate.notNull(inventory);
         Validate.notNull(item);
 
         for (int i = 0; i < inventory.getSize(); i++) {
             ItemStack stack = inventory.getItem(i);
             if ((stack != null) &&
-                    (ItemUtils.compare(item, stack, false, ignoreDurability, ignoreAmount, ignoreName, ignoreLores, ignoreEnchants)))
+                    (ItemUtils.compare(item, stack, false,  ignoreAmount, ignoreName, ignoreLores, ignoreEnchants)))
                 return i;
         }
         return -1;

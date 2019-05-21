@@ -2,6 +2,8 @@ package au.com.addstar.serversigns.utils;
 
 import org.bukkit.enchantments.Enchantment;
 
+import java.util.ArrayList;
+
 public class ParseUtils {
     private static Enchantment[] enchantList = new Enchantment[25];
     private static Alias[] enchantAliases = new Alias[25];
@@ -110,7 +112,7 @@ public class ParseUtils {
 
     public static org.bukkit.Color stringToColor(String s) {
         if (!s.contains(",")) return null;
-        java.util.List<Integer> intList = new java.util.ArrayList();
+        java.util.List<Integer> intList = new ArrayList<>();
         for (String st : s.split(",")) {
             if (!NumberUtils.isInt(st)) return null;
             intList.add(NumberUtils.parseInt(st));

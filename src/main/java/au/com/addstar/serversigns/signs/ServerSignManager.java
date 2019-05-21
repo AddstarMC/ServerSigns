@@ -31,7 +31,7 @@ public class ServerSignManager {
     private final Path INVALID_SIGNS_COMMANDS_DIRECTORY;
     private final Path INVALID_SIGNS_DUPLICATE_DIRECTORY;
     private final Path EXPIRED_SIGNS_DIRECTORY;
-    private HashMap<Location, ServerSign> signs = new HashMap();
+    private HashMap<Location, ServerSign> signs =  new HashMap<>();
 
     public ServerSignManager(ServerSignsPlugin instance) throws IOException {
         this.plugin = instance;
@@ -317,7 +317,3 @@ public class ServerSignManager {
 }
 
 
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\signs\ServerSignManager.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

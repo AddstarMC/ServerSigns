@@ -18,9 +18,3 @@ public class ColouredStringMapper implements IPersistenceMapper<String> {
         this.memorySection.set(path, StringUtils.decolour(value));
     }
 }
-
-
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\persist\mapping\ColouredStringMapper.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

@@ -21,9 +21,11 @@ import au.com.addstar.serversigns.utils.TimeUtils.TimeUnit;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.logging.Level;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.Action;
@@ -41,12 +43,15 @@ public class ServerSignExecutor {
         try {
             if ((event != null) && (sign.getCancelMode().equals(CancelMode.ALWAYS))) {
                 event.setCancelled(true);
+                plugin.debug("Event cancelled because Cancel Mode is Always");
             }
 
 
             if (!isReady(player, sign)) {
                 if ((event != null) && (sign.getCancelMode().equals(CancelMode.FAIL_ONLY))) {
                     event.setCancelled(true);
+                    plugin.debug("Event cancelled - sign not ready - because Cancel Mode is "+CancelMode.FAIL_ONLY.name());
+
                 }
                 return;
             }
@@ -67,6 +72,7 @@ public class ServerSignExecutor {
 
                 List<PermissionGrantPlayerTask> grantTasks = null;
                 if ((sign.getGrantPermissions() != null) && (!sign.getGrantPermissions().isEmpty())) {
+                    plugin.debug("Adding grant permission tasks");
                     if (((!this.plugin.hookManager.vault.isHooked()) || (!this.plugin.hookManager.vault.getHook().hasPermissions())) && ((this.plugin.config.getPermissionAddCommand().isEmpty()) || (this.plugin.config.getPermissionRemoveCommand().isEmpty()))) {
                         if (sign.shouldDisplayInternalMessages()) {
                             this.plugin.send(player, Message.FEATURES_NOT_AVAILABLE);
@@ -75,6 +81,8 @@ public class ServerSignExecutor {
                         return;
                     }
                     grantTasks = grantPermissions(player.getUniqueId(), 0L, sign.getGrantPermissions(), tasks);
+                    plugin.debug("Adding "+grantTasks.size()+" permission grant tasks");
+
                 }
 
 
@@ -90,10 +98,14 @@ public class ServerSignExecutor {
 
 
                 if ((sign.getCommands().size() > 0) && (tasks.isEmpty())) {
+                    plugin.debug("Exiting as sign as 0 commands and 0 tasks to execute");
                     return;
                 }
+                int i = 1;
                 for (TaskManagerTask task : tasks) {
+                    plugin.debug("Processing task:" +i);
                     this.plugin.taskManager.addTask(task);
+                    i++;
                 }
             }
 
@@ -101,6 +113,8 @@ public class ServerSignExecutor {
             sign.setLastGlobalUse(System.currentTimeMillis());
             if (sign.getCooldown() > 0L) {
                 sign.addLastUse(player.getUniqueId());
+                plugin.debug("Set Cool down for player");
+
             }
 
 
@@ -166,21 +180,22 @@ public class ServerSignExecutor {
 
             this.plugin.serverSignsManager.save(sign);
         } catch (Exception ex) {
-            ServerSignsPlugin.log("Exception generated during execution of a looped ServerSign!", java.util.logging.Level.SEVERE, ex);
+            ServerSignsPlugin.log("Exception generated during execution of a looped ServerSign!", Level.SEVERE, ex);
         }
     }
 
     private void executeLoopRunnable(final ServerSign sign, final Player executor, long loopDelay) {
         new org.bukkit.scheduler.BukkitRunnable() {
             public void run() {
-                ServerSignExecutor.this.executeSignLooped(sign, executor.isOnline() ? executor : executor == null ? null : null);
+                ServerSignExecutor.this.executeSignLooped(sign, executor.isOnline() ? executor : null);
             }
         }.runTaskLater(this.plugin, loopDelay * 20L);
     }
 
 
     private List<TaskManagerTask> createCommandTasks(ServerSign sign, List<TaskManagerTask> existingList, Player executor, Action eventAction) {
-        List<TaskManagerTask> tasks = existingList == null ? new ArrayList() : existingList;
+        List<TaskManagerTask> tasks = existingList == null ? new ArrayList<>() : existingList;
+        plugin.debug("Adding Command tasks");
 
         ProcessingData processingData = new ProcessingData();
         for (ServerSignCommand command : sign.getCommands()) {
@@ -193,11 +208,11 @@ public class ServerSignExecutor {
                     if (processingData.lastResult == 2) {
                         break;
                     }
-
                     tasks.addAll(command.getTasks(executor, this.plugin, getInjectedCommandReplacements(sign, true)));
                 }
             }
         }
+        plugin.debug("Added "+tasks.size()+" tasks");
         return tasks;
     }
 
@@ -241,7 +256,7 @@ public class ServerSignExecutor {
     }
 
     private Map<String, String> getInjectedCommandReplacements(ServerSign sign, boolean looped) {
-        Map<String, String> replacementMap = new java.util.HashMap();
+        Map<String, String> replacementMap = new HashMap<>();
 
         replacementMap.put("<usesTally>", sign.getUseTally() + "");
         replacementMap.put("<signLoc>", sign.getWorld() + "," + sign.getX() + "," + sign.getY() + "," + sign.getZ());
@@ -306,7 +321,7 @@ public class ServerSignExecutor {
     }
 
     private boolean hasAnsweredQuestions(Player executor, ServerSign sign) {
-        List<String> displayedOptionIds = new ArrayList();
+        List<String> displayedOptionIds =  new ArrayList<>();
 
         ProcessingData processingData = new ProcessingData();
         for (ServerSignCommand command : sign.getCommands()) {
@@ -503,6 +518,7 @@ public class ServerSignExecutor {
 
     private void removeXP(Player player, ServerSign sign) {
         if (sign.getXP() > 0) {
+            plugin.debug("Removing Xp");
             player.setLevel(player.getLevel() - sign.getXP());
             if (sign.shouldDisplayInternalMessages()) {
                 this.plugin.send(player, Message.XP_REMOVED, "<levels>", sign.getXP() + "");
@@ -512,6 +528,7 @@ public class ServerSignExecutor {
 
     private boolean removeMoney(Player player, ServerSign sign) {
         if (sign.getPrice() > 0.0D) {
+            plugin.debug("Removing Money");
             if ((!this.plugin.hookManager.vault.isHooked()) || (!this.plugin.hookManager.vault.getHook().hasEconomy())) {
                 ServerSignsPlugin.log("Unable to remove money from " + player.getName() + " because no Economy plugins exist!");
                 return false;
@@ -548,6 +565,7 @@ public class ServerSignExecutor {
         if (sign.getPriceItems().isEmpty()) {
             return;
         }
+        plugin.debug("Removing Price Items");
         ItemStack[] items = sign.getPriceItems().toArray(new ItemStack[1]);
         if (!InventoryUtils.scan(player.getInventory(), sign.getPIC(), true, items).isEmpty()) {
             org.bukkit.Bukkit.getLogger().warning("A player has managed to execute a ServerSign without paying all the price items! (Location: " + sign.getLocation().toString() + ")");
@@ -558,7 +576,7 @@ public class ServerSignExecutor {
 
     private List<PermissionGrantPlayerTask> grantPermissions(UUID player, long timestamp, List<String> permissions, List<TaskManagerTask> tasks) {
         assert (!permissions.isEmpty());
-        List<PermissionGrantPlayerTask> list = new ArrayList();
+        List<PermissionGrantPlayerTask> list = new ArrayList<>();
 
         for (String perm : permissions) {
             PermissionGrantPlayerTask grantTask = new PermissionGrantPlayerTask(timestamp, perm, player, true);
@@ -570,6 +588,7 @@ public class ServerSignExecutor {
     }
 
     private void removePermissions(UUID player, long timestamp, List<PermissionGrantPlayerTask> grantTasks, List<TaskManagerTask> tasks) {
+        plugin.debug("Adding remove Permission tasks");
         for (PermissionGrantPlayerTask grantTask : grantTasks) {
             tasks.add(new PermissionRemovePlayerTask(timestamp, player, grantTask, true));
         }
@@ -589,7 +608,3 @@ public class ServerSignExecutor {
 }
 
 
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\signs\ServerSignExecutor.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

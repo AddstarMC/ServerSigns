@@ -19,7 +19,7 @@ public class ItemStackListMapper implements ISmartPersistenceMapper<List<ItemSta
     }
 
     public List<ItemStack> getValue(String path) {
-        ArrayList<ItemStack> stacks = new ArrayList();
+        ArrayList<ItemStack> stacks = new ArrayList<>();
         List<String> rawStrings = this.memorySection.getStringList(path);
 
         for (String raw : rawStrings) {
@@ -36,7 +36,7 @@ public class ItemStackListMapper implements ISmartPersistenceMapper<List<ItemSta
     }
 
     public void setValue(String path, List<ItemStack> val) {
-        ArrayList<String> list = new ArrayList();
+        ArrayList<String> list = new ArrayList<>();
         for (ItemStack stack : val) {
             list.add(ItemUtils.getStringFromItemStack(stack));
         }
@@ -50,7 +50,3 @@ public class ItemStackListMapper implements ISmartPersistenceMapper<List<ItemSta
 }
 
 
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\persist\mapping\ItemStackListMapper.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

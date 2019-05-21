@@ -10,14 +10,16 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-public class PlayerInputOptionsManager implements org.bukkit.event.Listener {
-    private Map<UUID, List<String>> pendingOptionDisplays = new HashMap();
-    private Map<UUID, Data> pendingPlayerData = new HashMap();
+public class PlayerInputOptionsManager implements Listener {
+    private Map<UUID, List<String>> pendingOptionDisplays = new HashMap<>();
+    private Map<UUID, Data> pendingPlayerData = new HashMap<>();
 
-    private Map<UUID, Map<String, String>> completedAnswers = new HashMap();
+    private Map<UUID, Map<String, String>> completedAnswers = new HashMap<>();
     private ServerSignsPlugin plugin;
 
     public PlayerInputOptionsManager(ServerSignsPlugin plugin) {
@@ -96,7 +98,7 @@ public class PlayerInputOptionsManager implements org.bukkit.event.Listener {
         if (continueProcessing) {
             Data data = this.pendingPlayerData.get(player.getUniqueId());
             if (data != null) {
-                Map<String, String> map = new HashMap();
+                Map<String, String> map = new HashMap<>();
                 for (int k = 0; k < data.originalQuestionIds.size(); k++) {
                     map.put(data.originalQuestionIds.get(k), data.answers.get(k));
                 }
@@ -114,7 +116,7 @@ public class PlayerInputOptionsManager implements org.bukkit.event.Listener {
         }
     }
 
-    @org.bukkit.event.EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = false)
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = false)
     public void onPlayerChat(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
         String firstWord = event.getMessage().contains(" ") ? event.getMessage().split(" ")[0] : event.getMessage();
@@ -146,7 +148,3 @@ public class PlayerInputOptionsManager implements org.bukkit.event.Listener {
 }
 
 
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\signs\PlayerInputOptionsManager.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

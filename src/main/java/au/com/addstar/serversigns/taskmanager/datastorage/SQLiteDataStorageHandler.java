@@ -4,6 +4,7 @@ import au.com.addstar.serversigns.taskmanager.QueueConsumer;
 
 import java.nio.file.Path;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class SQLiteDataStorageHandler implements IDataStorageHandler {
     private final QueueConsumer<PersistTask> queueConsumer;
@@ -13,9 +14,9 @@ public class SQLiteDataStorageHandler implements IDataStorageHandler {
     public SQLiteDataStorageHandler(Path dataFolder) throws ClassNotFoundException {
         Class.forName("org.sqlite.JDBC");
         this.databaseUrl = String.format("jdbc:sqlite:%s", dataFolder.resolve("tasks.sqlite").toString());
-        this.tasksQueue = new java.util.concurrent.LinkedBlockingQueue();
+        this.tasksQueue = new LinkedBlockingQueue<>();
         PersistTaskExecutor persistTaskExecutor = new PersistTaskExecutor(this);
-        this.queueConsumer = new QueueConsumer(this.tasksQueue, persistTaskExecutor);
+        this.queueConsumer = new QueueConsumer<>(this.tasksQueue, persistTaskExecutor);
     }
 
     public void init() throws Exception {
@@ -53,7 +54,3 @@ public class SQLiteDataStorageHandler implements IDataStorageHandler {
 }
 
 
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\taskmanager\datastorage\SQLiteDataStorageHandler.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

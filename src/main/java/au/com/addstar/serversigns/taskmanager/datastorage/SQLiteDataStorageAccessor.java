@@ -100,7 +100,7 @@ public class SQLiteDataStorageAccessor
 
     public void saveTask(TaskManagerTask task) throws Exception {
         if (this.saveCloseChain == null) {
-            this.saveCloseChain = new ArrayList();
+            this.saveCloseChain =  new ArrayList<>();
         }
 
         ISQLiteTaskSaver taskSaver = TASK_SAVERS.get(task.getTaskType());
@@ -113,7 +113,7 @@ public class SQLiteDataStorageAccessor
 
     public void deleteTask(TaskManagerTask task) throws Exception {
         if (this.deleteCloseChain == null) {
-            this.deleteCloseChain = new ArrayList();
+            this.deleteCloseChain =  new ArrayList<>();
         }
 
         ISQLiteTaskDeleter taskDeleter = TASK_DELETER.get(task.getTaskType());
@@ -194,7 +194,3 @@ public class SQLiteDataStorageAccessor
 }
 
 
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\taskmanager\datastorage\SQLiteDataStorageAccessor.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

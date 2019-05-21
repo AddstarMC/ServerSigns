@@ -22,7 +22,3 @@ public class IsOpOperator extends ConditionalOperator {
 }
 
 
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\parsing\operators\IsOpOperator.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

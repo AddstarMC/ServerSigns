@@ -105,7 +105,7 @@ public class ItemStringParser {
                 return map;
             }
             String value = this.input.substring(this.input.indexOf(EQUALIZER) + 1);
-            List<String> values = new ArrayList();
+            List<String> values = new ArrayList<>();
             values.add(value);
 
             map.put(part, values);
@@ -145,7 +145,3 @@ public class ItemStringParser {
 }
 
 
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\itemdata\ItemStringParser.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

@@ -94,7 +94,7 @@ public class ServerSignCommandListMapper implements ISmartPersistenceMapper<List
 
     public void setValue(String path, List<ServerSignCommand> value) {
         if (value.isEmpty()) {
-            this.memorySection.set(path, new ArrayList());
+            this.memorySection.set(path,  new ArrayList<>());
             return;
         }
         for (int k = 0; k < value.size(); k++) {
@@ -114,7 +114,3 @@ public class ServerSignCommandListMapper implements ISmartPersistenceMapper<List
 }
 
 
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\persist\mapping\ServerSignCommandListMapper.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

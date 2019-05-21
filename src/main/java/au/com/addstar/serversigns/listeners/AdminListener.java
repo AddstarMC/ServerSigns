@@ -230,7 +230,7 @@ public class AdminListener implements Listener {
             case HELD_ITEM_CRITERIA:
                 if (sign == null)
                     return;
-                sign.setHIC(new ItemSearchCriteria(meta.getValue().asBoolean(), meta.getValue(2).asBoolean(), meta.getValue(1).asBoolean(), meta.getValue(3).asBoolean()));
+                sign.setHIC(new ItemSearchCriteria(meta.getValue().asBoolean(), meta.getValue(2).asBoolean(), meta.getValue(1).asBoolean()));
 
 
                 this.plugin.send(recipient, Message.HELD_ITEM_CRITERIA_SET);
@@ -446,7 +446,7 @@ public class AdminListener implements Listener {
                 if (sign == null)
                     return;
                 if (meta.getValue().asObject() == null) {
-                    sign.setPermissions(new ArrayList());
+                    sign.setPermissions(new ArrayList<>());
                     this.plugin.send(recipient, Message.PERMISSIONS_REMOVED);
                 } else {
                     if (!meta.getValue().asStringList().isEmpty()) {
@@ -486,9 +486,7 @@ public class AdminListener implements Listener {
             case PRICE_ITEM_CRITERIA:
                 if (sign == null)
                     return;
-                sign.setPIC(new ItemSearchCriteria(meta.getValue().asBoolean(), meta.getValue(2).asBoolean(), meta.getValue(1).asBoolean(), meta.getValue(3).asBoolean()));
-
-
+                sign.setPIC(new ItemSearchCriteria(meta.getValue().asBoolean(), meta.getValue(2).asBoolean(), meta.getValue(1).asBoolean()));
                 this.plugin.send(recipient, Message.PRICE_ITEM_CRITERIA_SET);
                 saveRemoveExit = true;
                 break;

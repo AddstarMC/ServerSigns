@@ -29,7 +29,7 @@ public abstract class PlayerTask<T extends Enum<T>> extends TaskManagerTask<T> {
         if (player == null) {
             return TaskStatus.PLAYER_NOT_ONLINE;
         }
-
+        plugin.debug("Running Task:" +this.getClass().getSimpleName()+" : "+toString());
         return runPlayerTask(plugin, player);
     }
 
@@ -41,7 +41,3 @@ public abstract class PlayerTask<T extends Enum<T>> extends TaskManagerTask<T> {
 }
 
 
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\taskmanager\tasks\PlayerTask.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

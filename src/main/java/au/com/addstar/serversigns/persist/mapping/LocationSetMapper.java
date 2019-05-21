@@ -20,7 +20,7 @@ public class LocationSetMapper implements ISmartPersistenceMapper<Set<Location>>
 
     public Set<Location> getValue(String path) {
         List<String> strings = this.memorySection.getStringList(path);
-        Set<Location> locs = new HashSet();
+        Set<Location> locs = new HashSet<>();
 
         for (String str : strings) {
             Location loc = stringToLocation(str);
@@ -32,7 +32,7 @@ public class LocationSetMapper implements ISmartPersistenceMapper<Set<Location>>
     }
 
     public void setValue(String path, Set<Location> val) {
-        ArrayList<String> list = new ArrayList();
+        ArrayList<String> list = new ArrayList<>();
         for (Location loc : val) {
             list.add(loc.getWorld().getName() + "," + loc.getBlockX() + "," + loc.getBlockY() + "," + loc.getBlockZ());
         }
@@ -73,7 +73,3 @@ public class LocationSetMapper implements ISmartPersistenceMapper<Set<Location>>
 }
 
 
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\persist\mapping\LocationSetMapper.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

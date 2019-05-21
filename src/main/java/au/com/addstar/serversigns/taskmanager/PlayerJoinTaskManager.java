@@ -13,10 +13,11 @@ import java.util.UUID;
 import java.util.concurrent.BlockingQueue;
 
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-public class PlayerJoinTaskManager implements org.bukkit.event.Listener {
-    private final Map<UUID, List<PlayerTask>> playerJoinTasks = new HashMap();
+public class PlayerJoinTaskManager implements Listener {
+    private final Map<UUID, List<PlayerTask>> playerJoinTasks = new HashMap<>();
 
     private final ServerSignsPlugin plugin;
     private final BlockingQueue<TaskManagerTask> taskQueue;
@@ -35,7 +36,7 @@ public class PlayerJoinTaskManager implements org.bukkit.event.Listener {
                     if (this.plugin.getServer().getPlayer(playerTask.getPlayerUniqueId()) != null) {
                         this.taskQueue.offer(playerTask);
                     } else {
-                        List<PlayerTask> playerTasks = this.playerJoinTasks.computeIfAbsent(playerTask.getPlayerUniqueId(), k -> new java.util.ArrayList());
+                        List<PlayerTask> playerTasks = this.playerJoinTasks.computeIfAbsent(playerTask.getPlayerUniqueId(), k -> new java.util.ArrayList<>());
                         playerTasks.add(playerTask);
 
                         if (!playerTask.isPersisted()) {

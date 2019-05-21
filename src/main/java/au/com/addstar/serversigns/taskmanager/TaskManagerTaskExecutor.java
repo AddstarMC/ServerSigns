@@ -23,7 +23,7 @@ public class TaskManagerTaskExecutor implements ITaskExecutor<TaskManagerTask> {
     }
 
     public void runTasks(List<? extends TaskManagerTask> tasks) {
-        List<PlayerTask> tasksWaitingForPlayer = new ArrayList();
+        List<PlayerTask> tasksWaitingForPlayer =  new ArrayList<>();
         for (TaskManagerTask task : tasks) {
             runTaskImpl(task, tasksWaitingForPlayer);
         }
@@ -31,7 +31,7 @@ public class TaskManagerTaskExecutor implements ITaskExecutor<TaskManagerTask> {
     }
 
     public void runTask(TaskManagerTask task) {
-        List<PlayerTask> tasksWaitingForPlayer = new ArrayList();
+        List<PlayerTask> tasksWaitingForPlayer =  new ArrayList<>();
         runTaskImpl(task, tasksWaitingForPlayer);
         cleanUp(tasksWaitingForPlayer);
     }
@@ -60,7 +60,3 @@ public class TaskManagerTaskExecutor implements ITaskExecutor<TaskManagerTask> {
 }
 
 
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\taskmanager\TaskManagerTaskExecutor.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

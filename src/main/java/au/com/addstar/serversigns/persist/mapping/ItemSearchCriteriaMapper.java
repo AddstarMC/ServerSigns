@@ -12,8 +12,8 @@ public class ItemSearchCriteriaMapper implements IPersistenceMapper<ItemSearchCr
 
     public ItemSearchCriteria getValue(String path) {
         if (this.memorySection.getConfigurationSection(path) == null)
-            return new ItemSearchCriteria(false, false, false, false);
-        return new ItemSearchCriteria(this.memorySection.getBoolean(path + ".enchants"), this.memorySection.getBoolean(path + ".name"), this.memorySection.getBoolean(path + ".lores"), this.memorySection.getBoolean(path + ".durability"));
+            return new ItemSearchCriteria(false, false, false);
+        return new ItemSearchCriteria(this.memorySection.getBoolean(path + ".enchants"), this.memorySection.getBoolean(path + ".name"), this.memorySection.getBoolean(path + ".lores"));
     }
 
 
@@ -21,12 +21,7 @@ public class ItemSearchCriteriaMapper implements IPersistenceMapper<ItemSearchCr
         this.memorySection.set(path + ".enchants", val.getEnchantsCriteria());
         this.memorySection.set(path + ".name", val.getIgnoreName());
         this.memorySection.set(path + ".lores", val.getIgnoreLore());
-        this.memorySection.set(path + ".durability", val.getIgnoreDurability());
     }
 }
 
 
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\persist\mapping\ItemSearchCriteriaMapper.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

@@ -13,7 +13,7 @@ public class StringLongHashMapper implements IPersistenceMapper<HashMap<String, 
     }
 
     public HashMap<String, Long> getValue(String path) {
-        HashMap<String, Long> map = new HashMap();
+        HashMap<String, Long> map =  new HashMap<>();
         if (this.memorySection.getConfigurationSection(path) == null) return map;
         for (String key : this.memorySection.getConfigurationSection(path).getKeys(false)) {
             map.put(key, this.memorySection.getLong(path + "." + key));
@@ -30,7 +30,3 @@ public class StringLongHashMapper implements IPersistenceMapper<HashMap<String, 
 }
 
 
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\persist\mapping\StringLongHashMapper.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

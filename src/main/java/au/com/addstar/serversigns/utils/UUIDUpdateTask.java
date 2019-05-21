@@ -3,13 +3,14 @@ package au.com.addstar.serversigns.utils;
 import au.com.addstar.serversigns.ServerSignsPlugin;
 import au.com.addstar.serversigns.signs.ServerSign;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class UUIDUpdateTask {
     private ServerSignsPlugin plugin;
     private ServerSign sign;
-    private java.util.Map<String, java.util.UUID> uuidMap = new HashMap();
+    private java.util.Map<String, java.util.UUID> uuidMap =  new HashMap<>();
     private boolean complete = false;
 
 
@@ -19,7 +20,7 @@ public class UUIDUpdateTask {
     }
 
     public void updateLastUse() {
-        final List<String> list = new java.util.ArrayList(this.sign.getLastUse().keySet());
+        final List<String> list =  new ArrayList<>(this.sign.getLastUse().keySet());
         if (list.isEmpty()) return;
         ServerSignsPlugin.log("Starting UUID conversion for " + list.size() + " usernames from a ServerSign at " + this.sign.getLocationString());
 
@@ -35,7 +36,7 @@ public class UUIDUpdateTask {
                 }
 
                 HashMap<String, Long> oldLastUse = UUIDUpdateTask.this.sign.getLastUse();
-                HashMap<String, Long> newLastUse = new HashMap();
+                HashMap<String, Long> newLastUse =  new HashMap<>();
 
                 for (java.util.Map.Entry<String, Long> entry : oldLastUse.entrySet()) {
                     if (UUIDUpdateTask.this.uuidMap.containsKey(entry.getKey())) {

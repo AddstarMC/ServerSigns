@@ -38,6 +38,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class ServerSignsPlugin extends JavaPlugin {
     public static final Random r = new Random();
     private static Logger logger;
+
+    private boolean debug = false;
     public PluginManager pm;
     public PlayerListener playerListener = new PlayerListener(this);
     public BlockListener blockListener = new BlockListener(this);
@@ -67,7 +69,7 @@ public class ServerSignsPlugin extends JavaPlugin {
             logger = getLogger();
             Path dataFolder = Files.createDirectories(getDataFolder().toPath());
             loadConfig(dataFolder);
-
+            setDebug(this.config.isDebugging());
             this.taskManager = new TaskManager(this, dataFolder);
             this.taskManager.init();
 
@@ -98,7 +100,10 @@ public class ServerSignsPlugin extends JavaPlugin {
             setEnabled(false);
         }
     }
-
+    public void debug(String message){
+        if(isDebug())
+        this.getLogger().info(ChatColor.DARK_GRAY+"[DEBUG] "+message+ChatColor.RESET);
+    }
     public void onDisable() {
         if (this.taskManager != null) {
             this.taskManager.stop();
@@ -181,10 +186,14 @@ public class ServerSignsPlugin extends JavaPlugin {
     public ServerSignsConfig getServerSignsConfig() {
         return this.config;
     }
+
+    public boolean isDebug() {
+        return debug;
+    }
+
+    public void setDebug(boolean debug) {
+        this.debug = debug;
+    }
 }
 
 
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\ServerSignsPlugin.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

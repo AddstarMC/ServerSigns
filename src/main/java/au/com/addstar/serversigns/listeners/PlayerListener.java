@@ -12,6 +12,7 @@ import java.util.UUID;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -25,7 +26,7 @@ import org.bukkit.scheduler.BukkitTask;
 public class PlayerListener implements Listener {
     private static final EnumSet<Material> PLATE_MATERIALS = EnumSet.of(Material.OAK_PRESSURE_PLATE, Material.STONE_PRESSURE_PLATE, Material.LIGHT_WEIGHTED_PRESSURE_PLATE, Material.HEAVY_WEIGHTED_PRESSURE_PLATE);
     private ServerSignsPlugin plugin;
-    private HashMap<UUID, PlatePair> plateMap = new HashMap();
+    private HashMap<UUID, PlatePair> plateMap = new HashMap<>();
 
     public PlayerListener(ServerSignsPlugin instance) {
         this.plugin = instance;
@@ -35,29 +36,34 @@ public class PlayerListener implements Listener {
     public void playerInteractCheck(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         Block block = event.getClickedBlock();
+        BlockState state = event.getClickedBlock().getState();
 
         if (SVSMetaManager.hasExclusiveMeta(player, SVSMetaKey.YES)) {
+            plugin.debug("player interact excluded by meta - action ignored");
             return;
         }
 
         if (((event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) || (event.getAction().equals(Action.PHYSICAL)) || ((this.plugin.config.getAllowLeftClicking()) && (event.getAction().equals(Action.LEFT_CLICK_BLOCK)))) && (
-                (this.plugin.config.getAnyBlock()) || (this.plugin.config.getBlocks().contains(block.getType())))) {
+                (this.plugin.config.getAnyBlock()) || (this.plugin.config.getBlocks().contains(state.getType())))) {
             UUID playerUniqueId = player.getUniqueId();
             PlatePair pair = this.plateMap.get(playerUniqueId);
             if (pair == null) {
-                ServerSign sign = this.plugin.serverSignsManager.getServerSignByLocation(block.getLocation());
+                ServerSign sign = this.plugin.serverSignsManager.getServerSignByLocation(state.getLocation());
                 if (sign != null) {
+                    plugin.debug("Sign clicked action processing");
                     if ((event.getAction().equals(Action.LEFT_CLICK_BLOCK)) && (this.plugin.config.getAllowLeftClicking()) && (player.hasPermission("serversigns.admin")) && (
                             ((this.plugin.config.getSneakToDestroy()) && (player.isSneaking())) || ((!this.plugin.config.getSneakToDestroy()) && (!player.isSneaking())))) {
                         this.plugin.serverSignsManager.remove(sign);
                         this.plugin.send(event.getPlayer(), Message.COMMANDS_REMOVED);
                         event.setCancelled(true);
+                        plugin.debug("Sign clicked - removed by admin");
                         return;
                     }
 
-
+                    plugin.debug("Sign clicked - triggering");
                     this.plugin.serverSignExecutor.executeSignFull(player, sign, event);
-                    if (PLATE_MATERIALS.contains(block.getType())) {
+                    plugin.debug("Sign clicked - execute complete");
+                    if (PLATE_MATERIALS.contains(state.getType())) {
                         pair = new PlatePair(createRemoveTask(this.plugin, playerUniqueId), false);
                         this.plateMap.put(playerUniqueId, pair);
                     }
@@ -111,7 +117,3 @@ public class PlayerListener implements Listener {
 }
 
 
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\listeners\PlayerListener.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

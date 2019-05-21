@@ -11,7 +11,3 @@ public class PersistenceException extends Exception {
 }
 
 
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\persist\PersistenceException.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

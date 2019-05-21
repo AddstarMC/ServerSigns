@@ -41,7 +41,3 @@ public class PlayerTaskSaver implements ISQLiteTaskSaver {
 }
 
 
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\taskmanager\datastorage\PlayerTaskSaver.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

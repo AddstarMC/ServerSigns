@@ -59,7 +59,3 @@ public class ItemColour extends ItemData implements IItemData {
 }
 
 
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\itemdata\ItemColour.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

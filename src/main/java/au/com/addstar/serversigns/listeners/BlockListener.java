@@ -4,6 +4,7 @@ import au.com.addstar.serversigns.ServerSignsPlugin;
 import au.com.addstar.serversigns.signs.ServerSign;
 import au.com.addstar.serversigns.translations.Message;
 import org.bukkit.block.Block;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.BlockBreakEvent;
 
 public class BlockListener implements org.bukkit.event.Listener {
@@ -13,7 +14,7 @@ public class BlockListener implements org.bukkit.event.Listener {
         this.plugin = instance;
     }
 
-    @org.bukkit.event.EventHandler(priority = org.bukkit.event.EventPriority.HIGHEST, ignoreCancelled = true)
+    @EventHandler(priority = org.bukkit.event.EventPriority.HIGHEST, ignoreCancelled = true)
     public void onBlockBreak(BlockBreakEvent event) {
         Block block = event.getBlock();
         org.bukkit.Location location = block.getLocation();
@@ -46,7 +47,3 @@ public class BlockListener implements org.bukkit.event.Listener {
 }
 
 
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\listeners\BlockListener.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

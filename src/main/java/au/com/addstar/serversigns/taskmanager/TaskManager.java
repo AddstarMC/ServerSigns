@@ -14,6 +14,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.UUID;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.DelayQueue;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.regex.Pattern;
 
@@ -41,11 +42,11 @@ public class TaskManager {
     public TaskManager(ServerSignsPlugin plugin, Path dataFolder) throws Exception {
         this.plugin = plugin;
         this.currentId = new AtomicLong();
-        this.queue = new java.util.concurrent.DelayQueue();
+        this.queue = new DelayQueue<>();
         this.dataStorageHandler = new SQLiteDataStorageHandler(dataFolder);
         this.playerJoinTaskManager = new PlayerJoinTaskManager(plugin, this.queue, this.dataStorageHandler);
         this.taskExecutor = new TaskManagerTaskExecutor(plugin, this.dataStorageHandler, this.playerJoinTaskManager);
-        this.queueConsumer = new QueueConsumer(this.queue, new BukkitTaskManagerTaskExecutor(plugin, this.taskExecutor));
+        this.queueConsumer = new QueueConsumer<>(this.queue, new BukkitTaskManagerTaskExecutor(plugin, this.taskExecutor));
         this.taskManagerThread = new Thread(this.queueConsumer, "ServerSigns-TaskManager");
     }
 
@@ -139,7 +140,3 @@ public class TaskManager {
 }
 
 
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\taskmanager\TaskManager.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

@@ -22,7 +22,7 @@ public class ServerSignCommand implements java.io.Serializable {
     private long delay = 0L;
     private boolean alwaysPersisted = false;
     private int interactValue = 0;
-    private List<String> grant = new ArrayList();
+    private List<String> grant =  new ArrayList<>();
 
     public ServerSignCommand(CommandType type, String command) {
         this.type = type;
@@ -111,8 +111,8 @@ public class ServerSignCommand implements java.io.Serializable {
     }
 
     public List<TaskManagerTask> getTasks(Player executor, ServerSignsPlugin plugin, Map<String, String> injectedReplacements) {
-        List<TaskManagerTask> tasks = new ArrayList();
-        List<PermissionGrantPlayerTask> grantTasks = new ArrayList();
+        List<TaskManagerTask> tasks =  new ArrayList<>();
+        List<PermissionGrantPlayerTask> grantTasks =  new ArrayList<>();
 
         if (executor != null) {
             for (String perm : getGrantPermissions()) {
@@ -153,7 +153,3 @@ public class ServerSignCommand implements java.io.Serializable {
 }
 
 
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\parsing\command\ServerSignCommand.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

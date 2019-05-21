@@ -15,7 +15,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 public class QueueToTaskConverter {
     public static QueueToTaskResult convertFile(Path dataFolder) {
-        List<TaskManagerTask> converted = new ArrayList();
+        List<TaskManagerTask> converted =  new ArrayList<>();
         long yamlCurrentId = -1L;
 
         Path queueYml = dataFolder.resolve("taskQueue.yml");
@@ -116,7 +116,3 @@ public class QueueToTaskConverter {
 }
 
 
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\legacy\QueueToTaskConverter.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

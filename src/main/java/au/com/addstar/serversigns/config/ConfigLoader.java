@@ -1,7 +1,6 @@
 package au.com.addstar.serversigns.config;
 
 import au.com.addstar.serversigns.persist.PersistenceException;
-import au.com.addstar.serversigns.legacy.ConfigurationConverter;
 import au.com.addstar.serversigns.persist.YamlFieldPersistence;
 import au.com.addstar.serversigns.persist.mapping.MappingException;
 
@@ -29,15 +28,7 @@ public class ConfigLoader {
 
             int version = yamlConfiguration.getInt("config-version", 0);
             try {
-                if (version == 0) {
-                    ConfigurationConverter.updateConfig_0(yamlConfiguration, config, configPath);
-                } else if (version == 1) {
-                    YamlFieldPersistence.loadFromYaml(yamlConfiguration, config);
-                    ConfigurationConverter.updateConfig_1(yamlConfiguration, config, configPath);
-                } else if (version == 2) {
-                    YamlFieldPersistence.loadFromYaml(yamlConfiguration, config);
-                    ConfigurationConverter.updateConfig_2(yamlConfiguration, config, configPath);
-                } else if (version == 3) {
+                if (version == 3) {
                     YamlFieldPersistence.loadFromYaml(yamlConfiguration, config);
                 } else {
                     throw new ConfigLoadingException("Invalid config-version in config.yml");
@@ -58,7 +49,3 @@ public class ConfigLoader {
 }
 
 
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\config\ConfigLoader.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

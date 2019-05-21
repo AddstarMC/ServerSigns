@@ -13,6 +13,8 @@ public class ServerActionTask extends TaskManagerTask<ServerActionTaskType> {
     }
 
     public TaskStatus runTask(ServerSignsPlugin plugin) {
+        plugin.debug("Running Task:" +this.getClass().getSimpleName()+" : "+getSubType().toString()+
+                " : "+getData());
         switch (getSubType()) {
             case COMMAND:
                 plugin.serverCommand(getData());
@@ -31,7 +33,3 @@ public class ServerActionTask extends TaskManagerTask<ServerActionTaskType> {
 }
 
 
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\taskmanager\tasks\ServerActionTask.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

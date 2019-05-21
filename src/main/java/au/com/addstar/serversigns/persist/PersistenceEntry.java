@@ -18,7 +18,3 @@ public @interface PersistenceEntry {
 }
 
 
-/* Location:              C:\Users\benjamincharlton\Downloads\ServerSigns.jar!\de\czymm\serversigns\persist\PersistenceEntry.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */
