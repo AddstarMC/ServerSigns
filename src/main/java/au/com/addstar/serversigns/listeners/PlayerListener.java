@@ -8,6 +8,7 @@ import au.com.addstar.serversigns.translations.Message;
 
 import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.UUID;
 
 import org.bukkit.Material;
@@ -35,20 +36,18 @@ public class PlayerListener implements Listener {
     @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
     public void playerInteractCheck(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        Block block = event.getClickedBlock();
-        BlockState state = event.getClickedBlock().getState();
-
+        Material type = (event.getClickedBlock()!=null)? event.getClickedBlock().getState().getType(): event.getClickedBlock().getType();
         if (SVSMetaManager.hasExclusiveMeta(player, SVSMetaKey.YES)) {
             plugin.debug("player interact excluded by meta - action ignored");
             return;
         }
-
+        plugin.debug("player interact processing for SVS");
         if (((event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) || (event.getAction().equals(Action.PHYSICAL)) || ((this.plugin.config.getAllowLeftClicking()) && (event.getAction().equals(Action.LEFT_CLICK_BLOCK)))) && (
-                (this.plugin.config.getAnyBlock()) || (this.plugin.config.getBlocks().contains(state.getType())))) {
+                (this.plugin.config.getAnyBlock()) || (this.plugin.config.getBlocks().contains(type)))) {
             UUID playerUniqueId = player.getUniqueId();
             PlatePair pair = this.plateMap.get(playerUniqueId);
             if (pair == null) {
-                ServerSign sign = this.plugin.serverSignsManager.getServerSignByLocation(state.getLocation());
+                ServerSign sign = this.plugin.serverSignsManager.getServerSignByLocation(event.getClickedBlock().getLocation());
                 if (sign != null) {
                     plugin.debug("Sign clicked action processing");
                     if ((event.getAction().equals(Action.LEFT_CLICK_BLOCK)) && (this.plugin.config.getAllowLeftClicking()) && (player.hasPermission("serversigns.admin")) && (
@@ -63,16 +62,20 @@ public class PlayerListener implements Listener {
                     plugin.debug("Sign clicked - triggering");
                     this.plugin.serverSignExecutor.executeSignFull(player, sign, event);
                     plugin.debug("Sign clicked - execute complete");
-                    if (PLATE_MATERIALS.contains(state.getType())) {
+                    if (PLATE_MATERIALS.contains(type)) {
                         pair = new PlatePair(createRemoveTask(this.plugin, playerUniqueId), false);
                         this.plateMap.put(playerUniqueId, pair);
                     }
                 }
+                plugin.debug("No Sign detected at location");
             } else {
+                plugin.debug("player interact paired result");
                 pair.getTask().cancel();
                 pair.setTask(createRemoveTask(this.plugin, playerUniqueId));
                 event.setCancelled(pair.isCancelled());
             }
+        }else {
+            plugin.debug("player interact ignorred by SVS Action:"+event.getAction().name()+" BLockType:"+type);
         }
     }
 

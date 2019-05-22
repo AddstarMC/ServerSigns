@@ -193,6 +193,7 @@ public class ServerSignsPlugin extends JavaPlugin {
 
     public void setDebug(boolean debug) {
         this.debug = debug;
+        debug("SVS Debugging is enabled");
     }
 }
 
